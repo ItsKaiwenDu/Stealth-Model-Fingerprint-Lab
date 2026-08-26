@@ -1,0 +1,49 @@
+# Post-Incident Analysis: Stale Account Balance Serving
+
+## Summary
+
+For forty-seven minutes, customers querying account balances through one regional endpoint received outdated values. During the entire incident window, the database serving those balances was healthy, responsive, and returning correct data to every other consumer. The root cause was not a storage failure, a network partition, or a bad deploy artifact in isolation, but an interaction among three otherwise benign components: a retry policy designed to ride out transient refresh failures, a regional cache implementing last-write-wins invalidation, and a single deployment host whose system clock had drifted significantly ahead of true time. The deploy propagated a skewed notion of "now" into cache metadata, which then silently defeated every mechanism intended to correct it.
+
+## Background and Architecture
+
+The balance service sits between customer-facing APIs and a transactional database. To keep read latency low and shield the database from read amplification, each region maintains an in-memory cache of account balances. Cache entries carry a write timestamp and a freshness window. While an entry is inside its freshness window, it is served directly. Once it ages past the window, the service enters a stale-while-revalidate mode: the cached value is still returned to the caller, but a background refresh is issued against the database. If that refresh fails, a retry policy takes over, backing off exponentially and continuing to serve the last known good value until a refresh succeeds or an explicit invalidation arrives.
+
+Invalidation events are published whenever the owning transactional path commits a balance change. Each event carries the commit timestamp of the originating database transaction. On receipt, the cache compares the invalidation's timestamp against the timestamp of its current entry under a last-write-wins rule: if the incoming invalidation is newer, the entry is discarded and refreshed; if it appears older, it is ignored as redundant.
+
+## Causal Chain
+
+The chain began with the deployment host. One build machine in the deployment pipeline had a hardware clock drifting well ahead of real time, and its NTP synchronization had quietly lapsed. The build produced by this host embedded its own wall-clock timestamp into the binary as a fallback initialization value for cache metadata. When the new version rolled out, nodes in the affected region initialized certain cache entries using this embedded timestamp instead of their own local clocks, because the initialization path preferred an explicit value when present.
+
+The consequence was subtle and self-concealing. Those entries appeared, by every timestamp comparison performed inside the service, to have been written in the future. Under the freshness calculation, they remained comfortably inside their freshness windows long after any legitimate entry would have expired. The stale-while-revalidate machinery never triggered, because as far as the service could tell, nothing was stale.
+
+The retry policy then acted as a lock rather than a safety net. The policy's backoff state was keyed to the perceived age of the entry it was trying to refresh. Since the entries looked perpetually young, the policy concluded that no refresh pressure existed and suppressed the aggressive retry cadence entirely. What was designed to guarantee eventual consistency during failures instead guaranteed quiescence, because its trigger condition was evaluated against corrupted time.
+
+The final link closed the loop. As customers transacted, the database committed changes and published invalidation events stamped with correct commit timestamps from healthy database hosts. When these arrived at the affected region, the last-write-wins comparison found the invalidation timestamps older than the cache entries' skewed-future timestamps and discarded them as out-of-order duplicates. Every corrective signal the system generated was systematically rejected by the very mechanism built to apply it. The cache became an island of frozen truth, defended by three layers of logic that each behaved exactly as specified against inputs that were quietly wrong.
+
+## Why Monitoring Failed
+
+The monitoring stack reported green throughout, and each individual signal was honest. Database dashboards showed normal query latency and healthy replication, which was accurate; the database was never the problem. Cache hit rates and read latency looked excellent, arguably better than baseline, because serving stale values is cheap. Error rates were flat because nothing errored; the failure mode was success-shaped, delivering wrong answers quickly and confidently.
+
+The most damaging gap was that the staleness metric itself shared the flaw it was meant to detect. Cache age was computed as the difference between the current clock and the entry's write timestamp, using the same timestamp family that had been poisoned by the deployment host. Measured against skewed time, the entries looked seconds old. An external observer comparing served balances against the database would have caught the divergence immediately, but no such independent reconciliation ran at interactive timescales; the existing reconciliation job operated on a slow batch cadence and its alerts were tuned for batch-level tolerance rather than user-facing correctness.
+
+There was also no alert on clock synchronization status for deployment infrastructure. The drift on the build host had been accumulating for days and would have been trivially detectable by monitoring NTP offset, but deployment tooling sat outside the perimeter of what the observability investment covered. Detection ultimately came from customer reports of balances that did not match recent transactions, escalated through support.
+
+## Immediate Mitigation
+
+Once the hypothesis of corrupted cache metadata formed, mitigation was deliberately blunt. The affected region's cache tier was flushed entirely, forcing all subsequent reads to fall through to the database, which was verified healthy before the flush. The stale-while-reserve behavior was temporarily disabled in that region so that any future refresh failure would surface as a visible error rather than silent staleness. The drifted deployment host was pulled from the pool, its clock resynchronized, and the pipeline pinned to hosts with verified synchronization. Finally, a targeted reconciliation pass compared served balances against the database for accounts touched during the incident window to confirm no residual stale reads and to scope any downstream effects such as notifications or statements generated from incorrect figures.
+
+## Durable Prevention
+
+The lasting fixes address each layer of the chain independently, on the principle that no single component's assumption about time should be load-bearing.
+
+First, application servers no longer trust their own wall clocks for correctness decisions. Cache freshness and ordering logic moved to hybrid logical clocks that combine physical time with a logical counter, making ordering robust even when physical time misbehaves. Where wall-clock timestamps must be persisted, they are validated against bounds at ingestion, and entries carrying implausible timestamps are rejected rather than admitted.
+
+Second, invalidation no longer depends on timestamp comparison alone. Invalidation events now carry monotonically increasing sequence numbers assigned by the database, and last-write-wins comparisons use those sequences. Timestamps remain useful diagnostics but are no longer authoritative for correctness.
+
+Third, the cache enforces a hard maximum age enforced at the cache layer itself, independent of any application-supplied metadata, so that no combination of bad inputs can keep an entry eligible for service indefinitely.
+
+Fourth, retry behavior is decoupled from perceived entry age. The refresher runs on a bounded schedule with jitter regardless of how fresh entries claim to be, ensuring that a refresh attempt always occurs within a fixed interval no matter what the metadata says.
+
+Finally, two new monitors close the detection gaps: NTP offset alerting across the entire deployment fleet including build hosts, with deploys automatically blocked from unsynchronized machines, and an end-to-end freshness canary that writes a sentinel balance through the transactional path and measures how quickly it becomes readable through each regional API, alarming if propagation exceeds a tight bound. This canary measures truth from outside the system and cannot be fooled by the system's own clocks.
+
+The core lesson is that distributed correctness mechanisms are only as trustworthy as the weakest definition of "now" they consume. Every one of the safeguards in place worked correctly against the evidence available; the incident was possible only because the evidence itself was forged by a drifting clock.

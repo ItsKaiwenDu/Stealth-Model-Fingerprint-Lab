@@ -1,0 +1,73 @@
+# The Noonward Glance
+
+Dr. Elara Vance had seen mildew, blight, and nitrogen deficiency, but she had never seen a greenhouse full of healthy plants bowing like worshippers to an empty corner. The Whitmore Conservatory was a Victorian glass cathedral, its iron ribs arching high over rows of orchids, ferns, and improbable tropical exotics. Mr. Whitmore, a retired geologist with a nervous tic in his left eye, walked her down the central aisle with the urgency of a man presenting evidence of a haunting.
+
+“There,” he said, pointing. “At precisely noon. Every single one of them turns.”
+
+Elara looked. The northwest corner was bare—a patch of worn parquet floor, a sagging shelf, and a faded watering can. Nothing else. Yet the plants closest to it—a row of cobalt-blue bromeliads and a gangly passionflower—were leaning sharply, their stems curving as if straining toward a light source. The plants further back leaned less acutely, like a crowd craning to see a procession that had already passed.
+
+“Curious,” Elara murmured. She pulled out her loupe and knelt beside the nearest bromeliad. The stem’s curvature was smooth, classic positive phototropism. But what was the light? The greenhouse had skylights and glass walls, but no direct sunlight should reach that corner at noon. The sun would be high, almost directly overhead. The shadow of the roof’s central ridge would fall far to the south.
+
+“Have you seen it?” Whitmore asked.
+
+“Seen what?”
+
+“The light.” He whispered. “It’s like a knife. A beam. It lasts for ten minutes, then it’s gone. I thought it was the ghost of my wife’s cat, but I don’t believe in ghosts.”
+
+Elara didn’t either. She walked to the empty corner and crouched. The parquet floor was old, but she noticed a patch of wood that was substantially paler than the rest, almost bone-white. It was roughly a foot in diameter, with a slightly darker center. She scratched at it with her fingernail. No residue. No flaking. It wasn’t a spill. She frowned. It looked like wood that had been bleached by years of concentrated sunlight—like the underside of a table that sat near a window that always caught the evening glare. But this was a floor. The sun never hit a floor directly at that angle.
+
+She made a mental note. *Clue one: a pale, heat-bleached patch on the floor of the empty corner. She briefly mistook it for a chemical stain—a spilled bottle of fertilizer or a bleach wipe—and dismissed it.* She stood and swept her gaze across the greenhouse. Rows of plants. A thermostat on the wall. A dehumidifier humming in the distance. And high above, a row of roof vents—long, narrow glass louvers that could be cranked open to let out steam on hot days.
+
+“Who opens the vents?” Elara asked.
+
+Whitmore blinked. “My caretaker, Mr. Abbot. He does it religiously at noon, every day without fail. He says the plants appreciate a breeze.”
+
+“At noon?”
+
+“Yes. The midday heat is the worst. He cracks them for about an hour.”
+
+Elara climbed the iron ladder that led to the walkway beneath the eaves. The vent mechanism was a simple crank and worm gear. She examined the louver closest to the northwest corner. It was clean, well-oiled. But as she tilted her head, she noticed something odd: the metal support flange on the outermost louver was not the drab, oxidized bronze of its neighbors. It was bright, polished—almost mirror-like, scoured smooth by years of hand-polishing with an abrasive. That was odd. Why would a caretaker polish a vent flange?
+
+She climbed down. *Clue two: the polished, mirror-like metal flange on the vent.* This was a piece of building design—an unforeseen reflectivity—but she didn't yet know its purpose.
+
+She walked back to the plants and studied the gradient of the bend. The bromeliads nearest the corner were nearly horizontal. The passionflower, five feet back, was at a forty-five-degree angle. The ferns ten feet back were barely tilted. The angles dropped off sharply with distance. Elara’s eyes widened. That was the signature of a point source of light, not a broad wash. An inverse-square drop-off. Whatever was pulling them was small, intense, and localized—like a laser or a pinhole camera, not like a skylight.
+
+She turned to Whitmore. “I need to see the noon hour. And I need to see Mr. Abbot’s routine.”
+
+The next day, Elara arrived at 11:45. The greenhouse was warm, humid. Mr. Abbot, a stooped man with a gray apron, was fussing with a watering can. At 11:59, he looked at his wristwatch, nodded, and walked to a wall-mounted crank. He began turning it slowly. The roof louvers above the northwest corner began to tilt open.
+
+Elara watched. The sun was nearly dead overhead. A shaft of light angled through the newly opened vent—but it didn't strike the floor where the plants were leaning. Instead, it hit the polished metal flange of the outermost louver. The flange caught the high-angle rays and deflected them downward, a brilliant, sharp ellipse of white light that stabbed down onto the empty corner. It hit the pale patch of parquet exactly.
+
+A focused beam, maybe eight inches wide, burning on the floor. The plants nearest it visibly stirred. Elara watched a bromeliad’s stem flex—a tiny, imperceptible motion—leaning into the light. It was unmistakable.
+
+“That’s it,” Elara said.
+
+Whitmore gasped. “Look! There’s the ghost!”
+
+Mr. Abbot frowned. “Ghost? That’s just the sun reflecting off my polish.”
+
+Elara turned to Abbot. “Polish?”
+
+“He polishes the flange with metal polish every Sunday,” Whitmore said. “He's very particular about his brass.”
+
+Elara looked at the pale patch. It wasn't a chemical stain. It was years of this focused beam bleaching the wood. *Clue one, fully realized.* She had misread it as a liquid spill, but it was simply light-bleached timber.
+
+She walked over to the watering can in the corner and picked it up. Then she climbed the ladder, reached up, and gently twisted the polished flange a few degrees. The beam of light jumped sideways, landing harmlessly on a clear section of floor near the wall. The plants nearest the old spot immediately—slowly—began to straighten.
+
+“Wait,” Whitmore said. “Don’t adjust it. I want them to keep leaning. It’s beautiful.”
+
+Elara climbed down. “They’re not leaning toward a spirit, Mr. Whitmore. They’re leaning toward a sunbeam. At noon, your vent opens, the polished metal acts like a mirror, and it focuses a point of light exactly onto that corner. The plants, being plants, bend toward the light. It’s that simple.”
+
+Mr. Abbot looked sheepish. “I didn't know the polish would do that. I just like things shiny.”
+
+Elara nodded. “And you open the vent at noon. That’s the trigger. The building’s design—that particular louver’s angle—and your habit, Mr. Abbot, creates a temporary but powerful sunbeam. A perfect example of unintended optical geometry.”
+
+Whitmore was staring at the pale patch on the floor. “The wood. It’s faded.”
+
+“Bleached,” Elara said. “Years of focused sunlight. Not water damage, not a chemical. Just physics.” She looked around the greenhouse. The plants were already slowly concluding their noonday worship, their stems loosening as the beam shifted. The pale patch was the only scar—a silent testament to a thousand afternoons of a caretaker’s polish and a noon-time ritual.
+
+She pulled out her notebook, wrote a single line, and handed it to Whitmore. “If you close the vent a minute earlier, or turn the flange slightly, they’ll straighten out entirely. Or you can leave it as is. It’s harmless. In fact, your bromeliads have never looked healthier.”
+
+Whitmore laughed, a short, relieved bark. “I thought I was losing my mind.”
+
+Elara packed her loupe. “No. You were just losing your shadows.” She walked out into the noon sun, leaving the greenhouse to its quiet, measurable mysteries. The beam still shone on the floor, but now that she knew the angle, it was no longer a ghost—just a clever accident, polished weekly into existence.

@@ -1,0 +1,43 @@
+# The Word Between Two Houses
+
+I have translated letters of condolence, cease-fire drafts, wedding vows written in languages so old they have no living speakers, and a letter a dying man composed to a son he had never met. In twenty-two years of work, I have learned that the words people choose for their most serious moments are almost never the words they actually mean. The meaning lives underneath, in the silence around the syllables. My job is to carry that silence, intact, from one world into another.
+
+The first commission arrived on a Tuesday. An email from a lawyer representing the Asakura family, a shipping dynasty based in Kobe. Their patriarch, Haruki Asakura, wished to issue a formal written apology to the Okonkwo family of Lagos, whose patriarch, Emeka Okonkwo, had recently suffered the loss of his youngest daughter. The connection between the two men was older and stranger than either family seemed to know—a tangled web of a joint venture gone sour in 1987, a trade dispute in 1994, and a quiet financial entanglement that had persisted through proxies and shell companies for decades. The apology was meant to settle everything, once and for all. The Okonkwo family had agreed to receive it through the same London-based cultural mediation firm that had facilitated the original venture.
+
+The Asakura draft arrived as a PDF, composed in Japanese. I spent three hours translating it into English and Igbo simultaneously, as required. The text was elegant, restrained, almost liturgical. It expressed deep remorse for the suffering the Okonkwo family had endured. It acknowledged the pain of losing a child. It used the word *shazai*—sincere repentance, a word that carried the weight of Buddhist moral reckoning, of a debt owed not to a person but to the fabric of moral order itself. The phrase I am translating here, in English, is one of those rare constructions that resists flattening. *Shazai* is not "apology." It is not "sorry." It is a state of being that, once declared, restructures the speaker's identity. You do not apologize and remain who you were. You apologize and become someone who has apologized.
+
+The final word of the letter, however, was not *shazai*. It was *meny道歉*, but the Japanese text used the term *yurushimasu*—"please forgive"—at the close, in a way that shifted the entire letter from statement to supplication.
+
+I saved the file, drank cold coffee, and went to bed.
+
+On Thursday, a second email arrived. This one from the Okonkwo family's own solicitor. The Okonkwos, it seemed, had also composed a letter. They wished to express their willingness to receive the Asakura apology formally, and in doing so, they acknowledged the long history of injury on both sides. Their letter, too, was an apology—for what, exactly, the solicitor did not say. The Okonkwos wanted the letter rendered into Japanese. The draft was in English.
+
+I opened the attachment and read it twice. Then I sat very still in my chair.
+
+The wording was identical to the Asakura letter. Not similar. Not approximately the same. Identical. Every clause, every measured cadence, every carefully hedged phrase. The same structure, the same rhythm, the same content. The Okonkwo family had either seen the Asakura draft or both families had drawn from the same well of diplomatic boilerplate so deep that they had surfaced with the same water in their hands. The apology was for the suffering caused by a decades-long entanglement that had, in the end, cost a young woman her life. Both families were apologizing for that. Both families were acknowledging that their own pride and secrecy had fed the machine that produced the harm.
+
+The difference was one word.
+
+The Okonkwo letter, in its final sentence, used the phrase "with sincere regret." In the Igbo translation I had prepared from the Asakura draft, this corresponded to *nwanne m*, a term that meant something close to "my sibling." In the Japanese original, the equivalent was *yurushimasu*. But the Okonkwo letter, rendered back into Japanese by whoever had drafted it, used the word *zaiseki*—a formal, almost legalistic term for apology that carried no warmth, no moral transformation, no sense of obligation between the two families. It was the word a corporation uses when it is settling a liability, not the word a person uses when they are reaching across a divide and asking to be made whole.
+
+One family had offered *shazai*. The other had offered *zaiseki*. The rest of the text—the identical, mirrored text—was a frame for this single difference.
+
+I knew what the Asakura family intended. Their letter, in its Japanese original, was an act of *shazai*—a genuine, identity-altering confession that demanded a response of equal weight. If the Okonkwo family received the English translation and read "with sincere regret," they would understand something warm and human. But when the Japanese translation of their reply arrived in Kobe, carrying *zaiseki* instead of *yurushimasu*, the Asakura family would read a message that was polite, formal, and cold. They would read a legal settlement. They would read dismissal. The apology would land in Japan as an insult wrapped in proper grammar.
+
+I could, of course, translate each letter faithfully. The Asakura letter into English and Igbo, the Okonkwo letter into Japanese. I could footnote the difference. I could note the divergence and let the lawyers sort it out. That is what a careful translator does. That is what the contract implied.
+
+But I have spent twenty-two years carrying silences between worlds, and I know what happens when a silence is mishandled. These two families had spent thirty years talking past each other through lawyers and intermediaries and shell companies. They had lost a young woman to the machinery of their mutual stubbornness. Now, at last, they were speaking directly, and the words they had chosen—without knowing they had chosen differently—would either heal them or close the wound forever.
+
+I opened a new document. I wrote to both solicitors simultaneously. I explained, in language that was neutral and precise, that the final terms of each letter carried connotations that did not survive translation intact, and that I could not, in good faith, render one without noting the other. I recommended that both families revise their closing sentences to use language that could carry the same weight across both versions. I suggested a compromise term. I gave them forty-eight hours.
+
+The Asakura family's lawyer called me within the hour. He was stiff, formal, and asked me exactly what I meant by "weight." I told him. He went silent. Then he said he would consult his client.
+
+The Okonkwo family took a day. When their response came, it was a single sentence: *We understand. We will revise.*
+
+The revised letters arrived on Monday. Both families had changed their closing sentence to the same phrase, now rendered in a way that held its meaning in every language I touched. It was not elegant. It was not poetic. But it was honest, and it was the same.
+
+I translated them both, delivered the final documents to the London mediation firm, and received payment from two accounts in two currencies within the same week.
+
+I have thought, since then, about the word that almost broke them—a word that existed in one language as an act of surrender and in another as a receipt for damages. I did not choose a side. I did not soften one truth or sharpen another. I simply refused to let a wall be built where a bridge could stand.
+
+That, I have always believed, is what a translator is for.

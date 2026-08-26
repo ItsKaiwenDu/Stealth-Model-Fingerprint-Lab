@@ -1,0 +1,43 @@
+{
+  "source_id": "glm_5",
+  "prompt_id": "p06",
+  "requested_model": "z-ai/glm-5",
+  "returned_model": "z-ai/glm-5",
+  "provider": "AtlasCloud",
+  "created_at_utc": "2026-08-26T02:52:54.266158+00:00",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 98,
+    "completion_tokens": 2055,
+    "total_tokens": 2153,
+    "cost": 0.00656635,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00656635,
+      "upstream_inference_prompt_cost": 9.31e-05,
+      "upstream_inference_completions_cost": 0.00647325
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 501,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "settings": {
+    "protocol_version": 2,
+    "max_tokens": 16000,
+    "reasoning_effort": "high",
+    "reasoning_excluded": true,
+    "require_parameters": true,
+    "tools": "none",
+    "temperature": "provider default",
+    "top_p": "provider default"
+  },
+  "final_answer_characters": 7361
+}

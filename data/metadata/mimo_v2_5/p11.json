@@ -1,0 +1,43 @@
+{
+  "source_id": "mimo_v2_5",
+  "prompt_id": "p11",
+  "requested_model": "xiaomi/mimo-v2.5",
+  "returned_model": "xiaomi/mimo-v2.5",
+  "provider": "DeepInfra",
+  "created_at_utc": "2026-08-26T03:25:13.220452+00:00",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 1707,
+    "total_tokens": 1811,
+    "cost": 0.0034556,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0034556,
+      "upstream_inference_prompt_cost": 4.16e-05,
+      "upstream_inference_completions_cost": 0.003414
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 123,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "settings": {
+    "protocol_version": 2,
+    "max_tokens": 6000,
+    "reasoning_effort": "native default",
+    "reasoning_excluded": false,
+    "require_parameters": false,
+    "tools": "none",
+    "temperature": "provider default",
+    "top_p": "provider default"
+  },
+  "final_answer_characters": 8748
+}

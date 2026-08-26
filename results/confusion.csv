@@ -1,0 +1,8 @@
+actual\predicted,glm_5_3,glm_5_2,glm_5,mimo_v2_5,deepseek_v4_flash,gemini_3_7_flash,minimax_m3
+glm_5_3,11,0,0,0,0,0,0
+glm_5_2,3,6,1,0,0,1,0
+glm_5,0,1,8,1,1,0,0
+mimo_v2_5,2,0,1,5,2,0,1
+deepseek_v4_flash,0,0,4,1,5,0,1
+gemini_3_7_flash,0,0,0,0,0,11,0
+minimax_m3,0,0,0,1,0,0,10

@@ -1,0 +1,44 @@
+**MEMORANDUM**
+
+**TO:** Provost's Council, Facilities Committee, and Dean of Students Office
+**FROM:** Office of Institutional Planning and Assessment
+**DATE:** [Date]
+**RE:** Twenty-Four-Hour Library Access During Final Examinations — Analysis and Recommendation
+
+---
+
+**Background**
+
+At last month's Council meeting, the Student Senate formally requested that the main campus library remain open around the clock during the final examination period each semester. Our current hours close the library at midnight, with a study lounge in the student union available overnight. This memo summarizes the relevant considerations, proposes a one-semester pilot, and offers a recommendation with explicit conditions attached. Because the request touches academic life, budget, security, and student welfare simultaneously, I have tried to weigh each dimension rather than treat the question as a simple amenity decision.
+
+**Learning Benefits**
+
+The pedagogical case for extended hours is real but should not be overstated. A substantial body of research on study environments suggests that late-night access matters most to students who lack quiet, well-lit, technologically equipped space elsewhere—commuters, students with roommates, and those living in crowded housing. For residential students with adequate dormitory study space, the marginal learning benefit is smaller, though many report psychological comfort in having the option available during high-stress weeks. There is also a legitimate counterargument worth acknowledging: all-night studying often reflects poor time management and sleep deprivation, and institutions that normalize round-the-clock studying may inadvertently encourage habits that research consistently links to worse exam performance. The honest conclusion is that extended access supports learning for some students while enabling unhealthy patterns in others. A well-designed pilot should therefore measure not just usage but how students actually use the added hours.
+
+**Staffing Implications**
+
+Extended hours cannot be achieved by simply unlocking a door. Our librarians are not the constraint—reference questions after 10 p.m. during exams are minimal—but the building cannot operate unsupervised. A realistic overnight model requires at least one circulation or facilities staff member at the entrance desk, a security presence, and custodial coverage for the restrooms and high-traffic floors. Based on current wage rates, I estimate that staffing the library from midnight to 8 a.m. for fourteen consecutive nights would cost between $9,000 and $13,000 per semester, depending on whether we use existing staff on overtime or hire temporary workers. This is not a trivial sum for our budget, but it is small relative to the $4 million annual operating cost of the facility, and it is comparable to what we already spend on similar temporary measures, such as additional shuttle service during exam weeks.
+
+**Safety**
+
+Safety concerns cut in both directions. On one hand, an open library gives students studying late a supervised, lit, populated place to be, which is arguably safer than the status quo, in which students walk home from the student union lounge at 2 a.m. or study in isolated corners of academic buildings that remain unlocked for night classes. On the other hand, extending hours concentrates late-night foot traffic at a time when our campus escort and shuttle services operate at reduced frequency. If we open the library overnight, we must simultaneously extend the safety shuttle loop to include a library stop every thirty minutes between midnight and dawn, and ensure the blue-light phones on the main walking routes are inspected beforehand. The Department of Public Safety has reviewed this request informally and indicated that the additional shuttle hours could be absorbed within existing rosters at modest cost, provided we give them six weeks of notice.
+
+**Equity**
+
+The equity argument is, in my view, the strongest reason to favor the proposal. Our commuter students—roughly a third of enrollment—have no realistic alternative to campus space during exams, and our lowest-income students often share bedrooms or live in environments not conducive to study. Closing the library at midnight effectively tells these students that their access to institutional learning resources depends on their housing situation. There is a subtler equity issue as well: overnight access that requires a meal plan, a parking pass, or membership in a residence hall is not genuinely universal. The library is the one building on campus that belongs equally to everyone, and if the institution is going to support late-night studying at all, the library is the most equitable place to do it. That said, we should be honest that overnight access alone does not close gaps; it must be paired with existing tutoring and academic support services, which currently end their exam-week extended hours at 9 p.m.
+
+**Displaced Costs**
+
+Any honest accounting must recognize that costs do not disappear when they are avoided—they shift. If the library closes at midnight, students do not stop studying late; they study in dorm hallways, in twenty-four-hour diners off campus, or in their cars. Displaced costs include the risks students assume in those settings, the revenue that leaves campus, and the burden placed on Residence Life staff who manage noise complaints in the dorms during exam weeks. Residence Life reports that noise-related incidents rise measurably during finals, and at least some of that pressure would be relieved by an open library. Conversely, extending hours displaces costs onto the library's budget, Public Safety, and Facilities, and it creates a precedent: students will reasonably ask why overnight access is limited to exam weeks. The Council should decide now whether this is an exam-period measure or the first step toward permanent extended hours, because the answer changes how we should staff and fund it.
+
+**Recommendation**
+
+I recommend that the university approve a pilot of twenty-four-hour library access during the fall final examination period, with continuation contingent on satisfying the conditions below. I do not recommend permanent adoption at this time.
+
+**Conditions and Pilot Design**
+
+Four conditions should attach to the pilot. First, the overnight period must be limited to designated study floors, so that security staff can supervise a compact footprint and custodial coverage remains manageable. Second, the safety shuttle must add a library stop on a thirty-minute cycle overnight, funded from the existing transportation contingency line. Third, no additional recurring personnel budget may be requested for the pilot; overnight staffing must come from a one-time allocation capped at $15,000. Fourth, the pilot must be evaluated against metrics agreed upon in advance.
+
+For evaluation, I propose the following measures, to be collected by our office and reported to the Council within thirty days of the semester's end: nightly head counts taken at two random intervals between midnight and 6 a.m.; a short survey of overnight users covering commuting status, living situation, and whether the hours changed their sleep, study location, or sense of safety; Residence Life data on exam-week noise incidents compared with prior semesters; and Public Safety incident logs for the library and surrounding walking routes. The pilot should be judged successful if overnight occupancy averages at least forty students per night, surveyed commuters report meaningful benefit, and no adverse safety or facility incidents occur. If these thresholds are met, I would support extending the pilot for a second semester and formally costing a permanent model. If they are not met, the library should revert to midnight closing, and the Student Senate should be given the evaluation data in full.
+
+I am happy to discuss any of these points at the next Council meeting and can circulate a draft survey instrument beforehand if the Council wishes to review it.

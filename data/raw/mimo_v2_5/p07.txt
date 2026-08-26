@@ -1,0 +1,29 @@
+## Incident Analysis: Stale Account Balance Read Error
+
+**Causal Chain: A Perfect Storm of Retries, Cache, and Clock Skew**
+
+The incident originated not from a database failure, but from a subtle interaction within the application layer. A recent deployment introduced a new retry policy designed to improve resilience against transient network errors. This policy increased the number and aggressiveness of retry attempts for failed service calls. Unbeknownst to the engineers, one particular downstream dependency—the account balance service—was experiencing sporadic, high-latency responses under load.
+
+Simultaneously, a regional cache tier had been deployed to reduce database load. This cache was configured with a relatively short Time-To-Live (TTL), but its freshness was validated against timestamps provided by the application hosts. A separate deployment error had caused a small subset of hosts in one availability zone to have incorrect system clocks, set approximately two hours into the future.
+
+When the account balance service began returning slow responses, the retry policy kicked in. The increased load from retries overwhelmed the service, causing widespread timeouts. Requests that finally succeeded were cached by the regional cache tier. However, because the caching hosts in that zone read the incorrect future timestamp from the responding application host, they stored the data with a "refresh at" timestamp that was already in the past from a correct-time perspective. The cache believed its data was perpetually stale and invalid, but the specific failure path meant it was not being refreshed; instead, it was serving the last successfully fetched value indefinitely to that region. All other regions, with correctly synced clocks, continued to get fresh data, masking the problem as a localized anomaly.
+
+**Monitoring Blind Spot: Healthy Databases, Blind Observability**
+
+The monitoring stack performed exactly as designed, which was its failure. It was configured to alert on database performance, replication lag, and application error rates. The database remained healthy, so those checks passed. The application was not throwing exceptions; the retries were "succeeding" in that they were eventually getting a response from the cache, not timing out completely. The cache tier itself showed high hit rates and normal memory usage—a sign of success, not failure.
+
+The critical gap was the absence of data-freshness validation. No monitor compared the age of account balance data being served against a known-good source or an expected TTL. Observability focused on system health (CPU, memory, latency) rather than semantic correctness (are we serving the right data?). The incident was also geographically limited, affecting only the traffic routed through the zone with clock skew, further reducing its signature in aggregate, global metrics.
+
+**Immediate Mitigation: Forcing Freshness**
+
+The incident was identified when customer support began receiving reports of "incorrect balances" concentrated in a specific geographical area. The mitigation path was determined once engineers correlated the reports with traffic patterns and host deployment data.
+
+The first action was to manually force a cache purge in the affected regional tier. This immediately resolved the symptom for new requests, as the cache would now fetch fresh data from the canonical database source. Concurrently, the hosts with incorrect system clocks were identified and their NTP services were forcefully restarted and synced. This corrected the underlying clock skew that had corrupted the cache's time-based logic. As a final stabilization step, the recently deployed, aggressive retry policy was temporarily disabled via a feature flag for the problematic service dependency, reducing system load while a permanent fix was designed.
+
+**Durable Prevention: Correctness Over Component Health**
+
+Preventing recurrence requires a shift from monitoring components to monitoring data integrity. The primary durable fix will be the implementation of data-freshness checks. The caching layer will be augmented to periodically compare its served data with the source of truth on a sampled basis, alerting immediately on any discrepancy beyond an acceptable threshold.
+
+Architecturally, the clock-skew vulnerability will be eliminated by decoupling cache TTL logic from application-host timestamps. The cache will derive its time solely from an authoritative, network-synchronized time source, not from application context. Furthermore, retry policies will be made "context-aware," incorporating backpressure signals and preventing runaway retry storms that amplify underlying instability.
+
+Finally, the deployment pipeline will be enhanced with pre-flight checks for critical system time synchronization on hosts before they receive production traffic. This moves the verification left, ensuring that a host with clock skew is never deployed into a state where it can impact cache logic. The ultimate lesson is that the correctness of data is a feature that requires its own dedicated observability and failure modes, not just an assumed outcome of healthy infrastructure.

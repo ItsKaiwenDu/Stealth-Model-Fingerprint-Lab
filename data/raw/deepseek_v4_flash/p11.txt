@@ -1,0 +1,61 @@
+**MEMORANDUM**
+
+**TO:** President’s Cabinet
+**FROM:** [Your Name], Dean of Library Services
+**DATE:** October 26, 2023
+**SUBJECT:** Analysis of 24/7 Library Access During Final Examinations
+
+**Executive Summary**
+
+This memo responds to the growing student petition to extend the Curtis Memorial Library hours to 24 hours per day during the final examination period. While the demand for extended study space is legitimate and reflects the intense pressure our students face, a full shift to a 24/7 operating model entails significant operational costs, safety obligations, and staffing complexities that our small university must weigh carefully.
+
+After a comprehensive review of institutional data, peer institution practices, and budgetary constraints, we recommend a conditional implementation of a **late-night library pilot** rather than a full 24-hour opening. Specifically, we recommend extending hours to 2:00 AM on weekdays and 12:00 AM on weekends for the final ten days of the semester. This approach captures the majority of student study patterns, mitigates the highest cost and safety risks associated with the "graveyard shift" (2 AM–7 AM), and provides actionable data for future policy decisions. The full 24/7 model is not financially prudent for our current enrollment size, but the proposed pilot strikes a balance between academic support and fiscal responsibility, provided specific safety and staffing conditions are met.
+
+**Learning Benefits and Student Needs**
+
+The primary argument for extended hours rests on the premise that learning does not adhere to a 9-to-5 schedule. Many of our students are non-traditional, commuting from significant distances, or balancing employment and childcare. For these individuals, the fixed library schedule creates a conflict between their "day jobs" and their "study time." Extending hours allows these students to access physical resources—such as reserved course materials, anatomical models, and archival journals—that are often digitized but not exclusively available online.
+
+Furthermore, the exam period is unique in its intensity. The library currently serves as a centralized hub for quiet study, but its capacity is strained during peak afternoon and evening hours. By shifting the study population to later hours, we can decongest the existing study zones, potentially improving the environment for all students. However, we must also consider the pedagogical impact of sleep deprivation. Encouraging students to study until dawn is not always academically beneficial; research suggests that memory consolidation is hampered by all-nighters. Therefore, the pilot's goal should be to provide *flexibility* rather than to encourage extreme behavior. Setting the cutoff at 2:00 AM acknowledges that the marginal learning returns of 4:00 AM study sessions are often outweighed by the physical toll on the student.
+
+**Staffing and Operational Costs**
+
+The most significant barrier is staffing. The library currently operates with a skeleton crew of professional librarians and student assistants. Extending hours to 2:00 AM requires a minimum of two on-site staff members (one professional or trained supervisor, and one student worker) for safety and service quality. We cannot rely solely on student workers to manage the facility during late hours due to security protocols and emergency response requirements.
+
+Assuming a ten-day pilot, the cost breakdown is significant. We would require a shift differential of approximately 25% above the standard wage for all non-exempt staff. Additionally, we must consider the cost of a dedicated Campus Safety officer stationed within or immediately adjacent to the library. The current "walk-through" patrol schedule is insufficient for a building that is fully occupied after midnight. Estimated costs for staff wages, differentials, and additional safety presence total approximately $8,000 to $10,000 for the pilot period. While not a massive line item in the overall university budget, this amount is not neutral. It represents a trade-off—likely requiring cuts in new database acquisitions or interlibrary loan budgets for the spring semester to remain cost-neutral.
+
+**Safety and Security Considerations**
+
+Safety is the paramount concern. A small university campus is generally safe, but a lone student walking across a dark, sparsely populated quad at 3:00 AM faces unnecessary risk. Simply opening the library doors does not guarantee safety; it merely moves the risk from the resident hall to the library pathway.
+
+To alleviate this, we must implement a "safe transit" protocol. This involves the Campus Safety department providing a shuttle vehicle on-demand from the library to the parking lots and dormitories between 11:00 PM and 2:00 AM. However, this increases the burden on our safety officers, who currently handle patrol duties and emergency response. We must also establish a clear access control policy. Currently, the library is open to the public during the day. During the extended hours, we should implement a "Card-Swipe Only" policy, restricting access to current students, faculty, and staff with active ID cards. This reduces the risk of external individuals using the library as a shelter or target for theft. We cannot justify the risk of a security incident for the sake of a pilot; the safety infrastructure must be in place *before* the hours are extended.
+
+**Equity and Access**
+
+Conversely, the equity argument strongly supports the pilot. Students who live in off-campus apartments with disruptive roommates, or who lack a quiet, heated space at home, rely heavily on the library. For these populations, the library is not just a luxury; it is a necessity. Extending hours levels the playing field, allowing these students to study in a professional, resource-rich environment equal to that of their peers residing in quiet residential halls.
+
+However, we must be careful not to create a new inequity. If we extend hours, we must ensure that the library is adequately staffed to provide reference help. A student studying at midnight requires the same access to research databases and citation help as one studying at noon. We cannot run a "dumb" library where students can access the physical space but cannot access help. Therefore, the pilot must include professional librarian coverage via a "remote consultation" element if in-person professional staffing is not feasible, or we must extend the hours of the digital reference chat service to match the physical building hours.
+
+**Displaced Costs and Resource Strain**
+
+A critical factor frequently overlooked is "displaced costs." If the library is the only building open, we inadvertently place strain on ancillary services. For example, the campus vending machines (if under-stocked) become a liability, and custodial services will need to be re-scheduled. Currently, cleaning occurs in the evening. If the library is occupied until 2:00 AM, cleaning cannot occur until 3:00 AM, pushing the janitorial shift later and costing overtime for the Physical Plant department.
+
+Furthermore, we risk "heat congestion" in other areas. If the library is open, students may expect the campus dining facilities to remain open later to provide food. We do not have the staffing in Dining Services to support a midnight "Grub Hub" service without substantial cost. If we force students to leave the library to get food at 1:00 AM, we negate the safety benefits of keeping them inside. Consequently, students would have to rely on delivery services, which come with their own security protocols regarding campus access. The pilot thus requires a "closed campus" mindset where the library is a self-contained bubble for those hours.
+
+**The Proposed Pilot and Evaluation Metrics**
+
+Given these constraints, we propose the following pilot parameters for the Fall semester (December 10–December 20):
+
+- **Hours:** 7:00 AM to 2:00 AM (weekdays), 9:00 AM to 12:00 AM (weekends).
+- **Security:** Mandatory Campus Safety Officer stationed in the library lobby from 9:00 PM to close. Safe Walk/Safe Ride shuttle service available until 2:30 AM.
+- **Access:** ID card access only after 9:00 PM.
+- **Services:** Reference assistance available in-person until 9:00 PM (current schedule), with extended chat/email support until 12:00 AM.
+
+To evaluate this pilot, we will utilize the following metrics: **Gate Count Data** (entry numbers per hour post-10 PM), **Demographic Data** (percentage of on-campus vs. commuter students swiping in), **Incident Logs** (security and maintenance issues), and a **Post-Exam Survey** (qualitative feedback on the study environment and safety).
+
+**Recommendation**
+
+I recommend we proceed with the **2:00 AM pilot** for a two-week trial period, **conditional upon** the funding for the safety officer and the shift differentials being approved by the Budget Committee.
+
+We should not commit to a full 24/5 schedule at this time. The data from this pilot will tell us if the "demand curve" is still steep at 1:30 AM. If the gate count shows extremely low usage (e.g., less than 20 students on average after midnight), we will have concrete data to share with the student body explaining why a 24-hour model is unsustainable. If, however, the demand is high and the safety metrics are clean, we can revisit the budget for the Spring semester with a proven business case.
+
+Let us proceed with this measured approach—one that prioritizes student welfare, maintains fiscal discipline, and generates the data necessary for an informed, long-term decision. I welcome your questions at the upcoming Cabinet meeting.

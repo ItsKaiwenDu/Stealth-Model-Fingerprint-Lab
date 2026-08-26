@@ -1,0 +1,43 @@
+{
+  "source_id": "glm_5",
+  "prompt_id": "p12",
+  "requested_model": "z-ai/glm-5",
+  "returned_model": "z-ai/glm-5",
+  "provider": "StreamLake",
+  "created_at_utc": "2026-08-26T03:31:09.843396+00:00",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 9433,
+    "total_tokens": 9515,
+    "cost": 0.01816056,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01816056,
+      "upstream_inference_prompt_cost": 4.92e-05,
+      "upstream_inference_completions_cost": 0.01811136
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6988,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "settings": {
+    "protocol_version": 2,
+    "max_tokens": 16000,
+    "reasoning_effort": "high",
+    "reasoning_excluded": true,
+    "require_parameters": true,
+    "tools": "none",
+    "temperature": "provider default",
+    "top_p": "provider default"
+  },
+  "final_answer_characters": 11154
+}

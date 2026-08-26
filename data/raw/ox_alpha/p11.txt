@@ -1,0 +1,42 @@
+**INTERNAL MEMORANDUM**
+
+**To:** Provost's Office and University Operations Committee
+**From:** Office of Academic Resources Planning
+**Date:** [Date]
+**Re:** Recommendation on 24-Hour Library Access During Examination Periods
+
+---
+
+**Purpose and Recommendation**
+
+This memo responds to the Committee's request for advice on whether the campus library should remain open continuously during the final examination periods in December and May. After reviewing usage data from comparable institutions, consulting library staff and Campus Safety, and weighing the educational, financial, and equity considerations outlined below, my recommendation is that the university adopt a limited pilot: extend library hours to 24-hour operation during the final two weeks of each semester's examination period only, subject to five explicit conditions described at the end of this memo. I do not recommend permanent year-round 24-hour operation at this stage, because the evidence of demand is promising but incomplete, and the staffing and safety implications are significant enough to warrant a structured trial rather than an open-ended commitment.
+
+**Learning Benefits**
+
+The strongest argument for extended hours is pedagogical. Examinations concentrate academic work into a compressed window, and students' study rhythms vary considerably; some do their best analytical thinking late at night, and others simply cannot find contiguous blocks of quiet time during a crowded daytime schedule. When every seat is taken by mid-afternoon, access to space becomes a genuine constraint on learning rather than a matter of preference. A library open overnight converts dead time into productive study time precisely when its value is highest. Research on library usage at universities that have adopted round-the-clock service during finals consistently shows heavy late-night utilization, suggesting that unmet demand exists and that current closing times leave legitimate study needs unserved. There is also a qualitative benefit: late-night hours tend to attract focused, self-selected users, so crowding and noise—common complaints during exam weeks—are likely to improve even for students who never visit after midnight.
+
+**Staffing Implications**
+
+Extended hours nonetheless carry real labor costs and raise fair questions about working conditions. The library currently staffs service desks until midnight on weekdays. Remaining open through the night requires either overtime for existing employees, additional temporary hires, or a reduced-service model in which some floors remain accessible while staffed services such as circulation, reserves, and reference are suspended overnight. I advise against relying primarily on overtime, which is expensive and risks burnout among long-serving staff who already face elevated workloads in exam weeks. The more sustainable model combines a small overnight team—a security-trained monitor at the entrance, one circulation assistant, and a facilities presence—with self-service systems for checkouts and printing. This must be negotiated carefully with staff representatives, ideally through voluntary sign-up with premium compensation, so that overnight duty does not fall disproportionately on junior employees who feel unable to decline.
+
+**Safety Considerations**
+
+Safety is the most consequential condition. An occupied but thinly staffed building at 3 a.m. presents distinct risks: fatigue-related accidents, medical emergencies among sleep-deprived students, harassment, and vulnerability of a largely empty facility to unauthorized entry. Mitigation is achievable but must be resourced honestly rather than assumed. The pilot should require a Campus Safety escort point or regular patrol sweeps at agreed intervals, functioning card-access control restricted to university affiliates, CCTV coverage of entrances and stairwells, a clear protocol for handling intoxicated or distressed individuals, and panic alarms at staffed positions. Lighting in surrounding walkways and parking areas also matters; students leaving at 4 a.m. need a safe route home, and the university should coordinate with transportation services on late-night shuttle stops if demand justifies it. If these safeguards cannot be funded within the pilot budget, the pilot should not proceed, because a poorly protected overnight opening is worse than no overnight opening.
+
+**Equity Effects**
+
+Equity arguments cut in both directions, but on balance favor extension. Students who commute, work part-time jobs during conventional hours, or shoulder caregiving responsibilities often have no alternative but to study late. Residents of noisy shared housing and international students facing time-zone pressures on family obligations similarly benefit from a reliable institutional space. Meanwhile, students without laptops or reliable home internet depend on library computers and networks that vanish at closing time. Conversely, there is an equity risk if overnight access effectively serves only students who live nearby or feel safe walking at night; this argues for pairing extended hours with transit support rather than treating the library alone as sufficient. On net, however, the current schedule disadvantages exactly the students with the fewest private resources, and extended hours partially correct that imbalance.
+
+**Displaced Costs and Hidden Trade-offs**
+
+Advocates sometimes present overnight opening as nearly costless because the building already exists, but this understates displaced expenses. Utilities for heating, cooling, and lighting a large facility add measurable cost per week. Custodial schedules shift rather than shrink, requiring either night-shift premiums or deferred cleaning elsewhere. Security coverage, as noted, is a genuine new expense. Most importantly, funds committed here compete with alternatives—extended hours at other study venues, expanded tutoring during evening peaks, or additional seating in high-demand areas—that might serve learning as effectively at lower cost. The memo should therefore be candid: the question is not whether overnight library access is valuable, but whether it is the highest-value use of roughly the sum required, and only a pilot with real usage data can answer that.
+
+**Designing and Evaluating the Pilot**
+
+A well-designed pilot should run for the two examination weeks in each of the next two semesters, giving four weeks of data across different seasons. Entry counts by hour, drawn automatically from card-swipe data, will reveal whether overnight occupancy justifies costs; anecdotal enthusiasm alone should not drive permanence. The evaluation should pair these counts with brief exit surveys capturing who is using the space, what they would otherwise have done, and whether they perceive safety concerns. Staff feedback should be gathered formally after each cycle, since attrition and morale problems emerge over time rather than immediately. Campus Safety incident reports during pilot nights should be compared with baseline periods. Finally, finance should track actual incremental costs—utilities, wages, security—against projections, so the permanent decision rests on observed rather than estimated figures. Success thresholds should be set in advance: for example, average overnight occupancy above a stated floor, no serious safety incidents attributable to the change, and incremental costs within the approved envelope.
+
+**Recommendation and Conditions**
+
+I recommend approval of a two-semester pilot with the following explicit conditions: first, 24-hour operation is limited to the final two weeks of each examination period, not adopted permanently pending results; second, overnight service runs on a reduced-service model with voluntary staffing and negotiated compensation, not mandatory overtime; third, dedicated funding for Campus Safety presence, card access, CCTV verification, and exterior lighting is secured before launch; fourth, a late-night transportation option is coordinated for students departing between midnight and dawn; and fifth, the pilot concludes with a formal written evaluation against pre-set occupancy, safety, cost, and staff-wellbeing benchmarks, presented to this Committee before any decision on continuation.
+
+This approach captures the substantial learning and equity benefits of extended access while protecting staff, controlling costs, and ensuring that any permanent adoption rests on evidence rather than enthusiasm.

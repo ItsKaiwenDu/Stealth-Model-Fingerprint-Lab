@@ -1,0 +1,43 @@
+Incident Overview
+
+For 47 minutes, our account balance service returned outdated information to a subset of users. Throughout this period, the primary database remained perfectly healthy, accurately recording all balance updates and maintaining normal replication. The disruption was entirely isolated to the application and caching layers, driven by a subtle interaction between a clock-skewed deployment host, a regional cache configuration, and an aggressive application retry policy. This analysis details the exact causal chain that led to the stale reads, explains why our monitoring infrastructure failed to detect the anomaly, outlines the immediate mitigation steps taken, and describes the durable architectural changes being implemented to prevent a recurrence.
+
+The Causal Chain of Events
+
+The incident began with a routine deployment of a new version of the account service. One of the deployment targets, a newly provisioned host, experienced a system clock drift and was running several minutes behind the rest of the fleet. This drift was minor enough to allow the host to pass initial deployment health checks but significant enough to corrupt cache expiration calculations.
+
+When the account service reads a balance, it first checks the regional cache. On a cache miss, the service fetches the current balance from the database and writes it back to the regional cache. The application was configured to calculate the cache expiration time by adding a fixed Time-To-Live duration to the current system time of the host writing the entry, generating an absolute expiration timestamp. Because the deployment host’s clock was lagging, it calculated an absolute expiration time that was already in the past according to the regional cache’s highly synchronized internal clock. 
+
+Under normal circumstances, the regional cache would simply treat these entries as instant misses and discard them. However, the cache client library included a safety mechanism designed to improve availability during network partitions. If the cache server could not serve a fresh entry, the client was permitted to serve recently expired entries that had not yet been evicted from memory, provided a fresh entry could not be written.
+
+The final ingredient was a localized network blip that caused transient database connection timeouts on a separate node. The service’s retry policy was designed to prioritize availability over absolute consistency. Upon encountering a database timeout on the first attempt, the retry policy dictated that the service must fall back to the regional cache and serve the most recently available data rather than returning an error to the user.
+
+When the network blip occurred, the retry policy triggered the fallback mechanism. The cache client looked for the requested account balances and found the entries written by the clock-skewed host. Because these entries were technically expired but not yet evicted, the fallback safety mechanism engaged, and the outdated balances were served. As the clock-skewed host continued to serve traffic and populate the cache with instantly expired timestamps, the regional cache became saturated with these stale entries. For 47 minutes, any read request that hit a node experiencing the transient database timeouts fell back to this pool of outdated balances. Once the network blip resolved, the retry policy stopped triggering the fallback, but the stale entries remained in the cache until they were finally evicted, prolonging the issue slightly beyond the network resolution.
+
+Why Monitoring Failed to Alert
+
+Our monitoring infrastructure failed to detect the stale reads because it was fundamentally designed to measure infrastructure health rather than data freshness. The alerting systems observed that the primary database was operating normally, processing queries without error and maintaining standard replication. From the database perspective, the system was flawless.
+
+The regional cache metrics painted a similarly healthy picture. The cache reported normal memory usage and a high cache hit rate. Our monitoring system treated any cache hit as a success, entirely blind to the age or correctness of the data being returned. We lacked distributed tracing that could correlate the timestamp of a cache write with the timestamp of a cache read to detect clock-related discrepancies.
+
+Furthermore, the root cause required the simultaneous occurrence of a sub-threshold clock skew, a localized network blip, and the cache client’s fallback behavior. The clock skew on the single deployment host did not trigger a severe time-sync alarm. The transient database timeouts were too brief and localized to breach the error-rate threshold required to page the on-call engineer. Because no single metric captured the intersection of these three conditions, the monitoring system remained silent, and the issue was eventually detected through a user report rather than an automated alert.
+
+Immediate Mitigation Steps
+
+Upon receiving the user report regarding outdated balances, the on-call team immediately declared an incident and began investigating the discrepancy between the database state and the user-facing display. The team quickly confirmed the database held the correct balances, shifting the investigation to the caching layer.
+
+The first immediate action was to halt all ongoing deployments to prevent any additional clock-skewed hosts from entering the active rotation. The team then identified the specific host with the drifted clock and immediately cordoned it, removing it from the load balancer to stop it from further polluting the regional cache.
+
+To address the active stale data being served to users, the team executed a forced flush of the regional cache. This action effectively wiped the entire pool of outdated balances. Because the underlying database was healthy, the forced flush caused a temporary increase in database load as the application rebuilt the cache, but the system handled this gracefully. Once the cache was rebuilt by hosts with correctly synchronized clocks, the account balances returned to their accurate state. The active degradation was halted immediately upon cache invalidation, restoring normal service.
+
+Durable Prevention and Architectural Changes
+
+To ensure this complex interaction never recurs, we are implementing several durable changes across our caching, deployment, and application layers. 
+
+First, we are changing how cache expirations are calculated. The application will no longer compute absolute expiration timestamps using the local host clock. Instead, it will send a relative Time-To-Live duration to the cache server, allowing the cache server's own highly synchronized internal clock to compute the exact expiration time. This completely decouples cache freshness from the application host's timekeeping.
+
+Second, we are eliminating the cache client library's fallback behavior of serving expired entries. While this mechanism was originally intended to improve availability during network partitions, it violates our strict consistency requirements for account balances. Moving forward, the cache client will treat an expired entry as a hard miss, forcing a database fetch rather than serving stale data.
+
+Third, we are refining our application retry policy. The current policy allows a fallback to the regional cache upon any database error. We are changing this policy to only permit cache fallbacks during documented, catastrophic regional outages. Transient, localized connection timeouts will no longer trigger a fallback to potentially stale data; instead, the service will return a temporary error and prompt a user retry.
+
+Finally, we are upgrading our host-level time synchronization checks. Any clock skew, regardless of how minor, will now immediately fail health checks and remove the host from the active rotation until the time sync daemon corrects the drift. We are also deploying a new synthetic monitoring check that specifically validates the freshness of cached data by comparing cached values against the database in real-time, ensuring we catch data staleness before our users do.

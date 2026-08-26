@@ -1,0 +1,47 @@
+# Stale Balances for Forty-Seven Minutes: A Post-Incident Analysis
+
+## Summary
+
+On the date of this incident, the account-balance API began returning stale data for 47 minutes while the underlying database remained healthy and continued to accept writes. Customers viewing their balances during the window saw figures that did not reflect transactions completed minutes earlier. No data was lost, no customer funds were misappropriated, and once the cache was invalidated, every query reflected the correct state. The root cause was a subtle interaction between an aggressive retry policy, a regional read-through cache, and a deployment host whose clock had drifted several minutes ahead of real time.
+
+## The Causal Chain
+
+The incident did not have a single trigger; it emerged from the way three otherwise normal components amplified each other.
+
+The first component was the regional read-through cache that sits in front of the account-balance read path. The cache is populated lazily on a miss and serves subsequent reads for a configured time-to-live. The TTL is normally short, on the order of seconds, so that even a stale entry is corrected quickly. The cache key is composed of the account identifier and the cache region, and the freshness metadata attached to each entry is the local wall-clock time of the host that wrote the entry.
+
+The second component was the client-side retry policy used by the API edge nodes. When a balance read encountered a transient error or a slow downstream, the policy would retry the request up to three times, each against a different regional cache replica. The intent was to ride out a single degraded region, but the policy had no logic to deduplicate or to consider whether a successful response from a peer region was still trustworthy.
+
+The third component was a deployment host whose system clock had drifted roughly four minutes into the future. The host was not yet on the latest NTP correction cycle, and a routine configuration audit had not flagged it because the drift was inside the alerting threshold.
+
+The chain of events unfolded as follows. A configuration push triggered a rolling restart of the API edge nodes. During the restart, several edge nodes failed to warm their local cache entries quickly enough, and they began returning a small class of upstream errors. The retry policy, observing these errors, fan-outed requests to peer regions. Those peer regions served the requests from their own caches, returning what they believed to be fresh data. The balances they returned were, in fact, fresh relative to the regional clock that had written them, but the edge nodes receiving those responses also stamped the responses with their own clock time for downstream cache writes. Because that host clock was several minutes ahead, the regional cache accepted the response as valid for a TTL window that began in the future. The first such future-dated entry was admitted around the start of the window, and the regional cache continued to serve it for the remainder of the TTL, long after the true data had changed in the database. Subsequent retries from other edge nodes found the cache already warm and returned the same stale value, which propagated to clients and to other regional caches through the same fan-out path. The first genuine miss that would have refreshed the entry did not occur until traffic patterns shifted and a different key namespace was touched, at which point the stale entry had already aged out.
+
+## Why Monitoring Failed
+
+Three monitoring blind spots allowed the issue to persist undetected for 47 minutes.
+
+First, the cache-hit ratio remained in its expected band throughout the incident. From the cache's perspective, it was doing exactly what it was designed to do: serving quickly and avoiding load on the database. A hit ratio dashboard is a measure of efficiency, not of correctness, and in this case it was a strong signal that something was wrong only in retrospect.
+
+Second, the database health checks reported green. The database was the source of truth, and it continued to serve writes and to satisfy occasional cache-fill queries without error. Because the staleness was occurring entirely above the database, the database metrics looked pristine.
+
+Third, the application logs showed successful responses at the expected latency. Every read returned a 200, the cache answered within milliseconds, and the retry policy's success rate was within its normal range. There was no error spike, no timeout, and no elevated error rate to trigger an alert. The only signal that something was off was the implicit one that balances were not updating as quickly as customers expected, and that signal surfaced first in customer support, not in the monitoring stack.
+
+## Immediate Mitigation
+
+The on-call engineer was paged after customer reports of stale balances. The engineer's first action was to force a flush of the affected entries in the regional cache, which immediately restored correct balances for new queries. To prevent the bad entries from being re-admitted, the engineer temporarily disabled the cross-region fan-out path in the retry policy, routing all balance reads to the in-region cache. Once the cache was confirmed clean and traffic was stable, the engineer re-enabled the fan-out with a tighter validation rule. The 47-minute clock drift on the deployment host was corrected manually and confirmed against a known-good time source. The incident was declared resolved once a full cache flush had been performed and balance queries had been observed returning correct values for a sustained period.
+
+## Durable Prevention
+
+The durable fixes target each leg of the causal chain rather than any single component.
+
+For the cache, the freshness metadata should be derived from a server-side timestamp returned by the database or from a monotonic logical clock that is not affected by host wall-clock drift. The cache should reject any entry whose stamped time is more than a small skew tolerance ahead of the current logical time. This change removes the dependency on a single host's clock for freshness decisions.
+
+For the retry policy, the fan-out path should include a cross-region consistency check. A response from a peer region should be treated as advisory if the region has not recently confirmed a cache fill against the source of truth, and the policy should prefer the in-region cache for balance reads unless an explicit freshness check has passed. In addition, deduplication of retried balance reads should be enforced so that a stale value cannot be written back into multiple regional caches from a single client request.
+
+For the deployment hosts, the NTP offset threshold for alerting should be tightened from minutes to seconds, and the configuration audit should include a clock-drift check as part of the host readiness gate. Hosts that exceed the threshold should be quarantined from serving traffic until their clocks are corrected. The deployment process should also include a canary step that exercises balance reads end-to-end against a known fresh dataset, so that a future-dated cache entry would be caught before the rollout completes.
+
+Finally, the monitoring stack should be extended to include a correctness check that periodically reads a small set of sentinel accounts and compares the API response to a direct database query. A divergence that exceeds the configured freshness budget should page the on-call engineer directly, rather than waiting for customers to notice. Correctness monitoring complements the existing efficiency and availability dashboards and closes the gap that allowed this incident to remain invisible to operations for nearly an hour.
+
+## Closing Thoughts
+
+The incident is a reminder that distributed systems can be individually healthy and collectively incorrect. Each component behaved within its design envelope, and yet the interaction produced a user-visible failure that lasted 47 minutes. The path forward is not to add more alerts to the existing signals, but to introduce a correctness signal that spans the layers, and to remove the implicit trust that any one host's clock is a safe basis for freshness.

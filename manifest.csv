@@ -1,0 +1,9 @@
+source_id,role,display_name
+glm_5_3,reference,GLM-5.3
+glm_5_2,reference,GLM-5.2
+glm_5,reference,GLM-5
+mimo_v2_5,reference,MiMo V2.5
+deepseek_v4_flash,reference,DeepSeek V4 Flash
+gemini_3_7_flash,reference,Gemini 3.7 Flash
+minimax_m3,reference,MiniMax M3
+ox_alpha,target,Ox Alpha

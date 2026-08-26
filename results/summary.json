@@ -1,0 +1,77 @@
+{
+  "matched_prompts": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05",
+    "p06",
+    "p07",
+    "p08",
+    "p09",
+    "p10",
+    "p11"
+  ],
+  "reference_accuracy": 0.7272727272727273,
+  "reference_macro_recall": 0.7272727272727273,
+  "target": "ox_alpha",
+  "target_vote_counts": {
+    "glm_5_3": 11
+  },
+  "target_ranking": [
+    "glm_5_3",
+    "glm_5_2",
+    "gemini_3_7_flash",
+    "glm_5",
+    "mimo_v2_5",
+    "deepseek_v4_flash",
+    "minimax_m3"
+  ],
+  "bootstrap": {
+    "glm_5_3": {
+      "mean_distance": 1.8094036519537513,
+      "ci95_low": 1.653560269337613,
+      "ci95_high": 2.0103145549948467,
+      "bootstrap_win_rate": 1.0
+    },
+    "glm_5_2": {
+      "mean_distance": 1.9362802038008875,
+      "ci95_low": 1.7710181134555754,
+      "ci95_high": 2.144181217113488,
+      "bootstrap_win_rate": 0.0
+    },
+    "glm_5": {
+      "mean_distance": 2.003642822189262,
+      "ci95_low": 1.8400324114408035,
+      "ci95_high": 2.2276892233411743,
+      "bootstrap_win_rate": 0.0
+    },
+    "mimo_v2_5": {
+      "mean_distance": 2.0115603487350486,
+      "ci95_low": 1.8584821505127973,
+      "ci95_high": 2.225694824750185,
+      "bootstrap_win_rate": 0.0
+    },
+    "deepseek_v4_flash": {
+      "mean_distance": 2.0299320350862113,
+      "ci95_low": 1.870720716999236,
+      "ci95_high": 2.2444860120355443,
+      "bootstrap_win_rate": 0.0
+    },
+    "gemini_3_7_flash": {
+      "mean_distance": 1.9994641360667467,
+      "ci95_low": 1.851954287651793,
+      "ci95_high": 2.189793801991383,
+      "bootstrap_win_rate": 0.0
+    },
+    "minimax_m3": {
+      "mean_distance": 2.042254604834463,
+      "ci95_low": 1.8600062679495286,
+      "ci95_high": 2.254835724620503,
+      "bootstrap_win_rate": 0.0
+    }
+  },
+  "warnings": [
+    "sources have unmatched prompt IDs; only the intersection will be analyzed"
+  ]
+}

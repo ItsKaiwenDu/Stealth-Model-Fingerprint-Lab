@@ -1,0 +1,61 @@
+# The Noonward Bend
+
+Dr. Imogen Hale had diagnosed dying palms in embassy atriums and rescued orchid collections from flooded basements, so when Winterbourne Gardens offered her a week's consultancy to explain why their display house had begun *leaning*, she expected root rot, or mites, or some slow botanical catastrophe. What she got instead was a room full of healthy plants bowing, every day, toward a corner that contained nothing at all.
+
+"They're fine in the morning," said Tomas Reyes, the head grower, walking her down the central aisle of the Victorian palm house. He was a careful man; his propagation benches were labeled in a hand so neat it looked printed. "By lunch they're all tipped over that way. By mid-afternoon they stand back up. Every species. Ferns, fuchsias, the crotons — everything."
+
+He stopped at the northwest corner of the glasshouse. It was an unremarkable wedge of floor: gray gravel, a drainage grate, an empty galvanized shelf. Around it, arranged in a rough semicircle, stood the affected plants, and at noon — she would confirm this herself — they all tilted inward like guests leaning to hear a whisper.
+
+"What do your people think it is?" Imogen asked.
+
+Tomas rubbed the back of his neck. "Young Priya swears it's the drainage pipes. Says there must be water running under the corner and the roots are following it. Mr. Fenn, our volunteer, thinks it's magnetic. There was a rumor for a while that someone was sneaking in a grow lamp, hiding it between shifts." He paused. "And two of the weekend staff aren't speaking to each other because one accused the other of pouring weed killer in the corner."
+
+"Weed killer?"
+
+"Come see."
+
+The corner told its own strange story. The gravel was bleached in a patch perhaps a meter square, pale as bone, with edges so straight and sharp that Imogen instinctively looked for a tarpaulin that might have lain there. The lowest leaves of the nearest ferns were crisped at the margins, papery and white.
+
+"Soil samples came back clean," Tomas said. "Twice. No herbicide, no salt, nothing. The scorch just spread a little wider every week, always the same rectangle."
+
+Imogen crouched and studied the bleached gravel. Straight edges. Right angles. A neat parallelogram, elongated toward the northwest corner. Herbicide splashed by hand does not make parallelograms. Spilled bleach does not make parallelograms. Parallelograms are made by things that cast or project shapes: boards, shadows, panes.
+
+She said none of this yet. "Show me your environmental logs," she said. "Everything. Temperature, humidity, irrigation, door alarms. And I want to know when this started."
+
+The logs gave her the first solid thing. The leaning had been noticed on the first of October, but the data logger's weekly printouts showed the corner's air temperature spiking two degrees above baseline starting September 21st — briefly, always between 11:30 and 12:40, always peaking at 12:15. More interesting was the timing itself. She charted six weeks of the lean's onset against the tide tables pinned in Tomas's office, and against the astronomical tables on her phone. Solar noon at Winterbourne's longitude had been 12:58 on the autumn equinox; it was 12:44 now, sliding earlier as the equation of time did its quiet arithmetic. The moment of maximum lean tracked it almost exactly, drifting a few seconds a day in perfect step with the sun.
+
+Whatever the plants were responding to, it kept solar time. Grow lamps hidden by mischievous staff keep clock time. Leaking pipes keep no time at all.
+
+The second solid thing came from the glazing ledger. Winterbourne's palm house was roofed in the original Victorian glass — not clear at all, but patterned opal glass, hammered and milky, installed a century ago specifically to shred sunlight into soft diffuse illumination. Imogen had noticed the quality of the light already: shadowless, gentle, the kind of light that makes greenhouses feel like being inside a pearl. Phototropic plants under such glass receive nearly equal brightness from every direction and grow straight up, which was exactly what ninety percent of the collection did.
+
+But entry forty-seven, dated September 19th, read only: *South slope, pane damaged by limb fall in high winds. Replaced.*
+
+No specification. No mention of glass type. Tomas confirmed it: a roofer had come out urgently — the pane was over the propagation house, and water was dripping onto seedling trays ahead of the Autumn Festival. He'd fitted what he had on the van. Nobody had checked what that was, and nobody had connected a single repaired pane to a house full of bending plants three days later.
+
+In the potting shed, Imogen found the answer to the specification question: a rack of spare panes, mostly opal, and a gap at the end of it where a single sheet of ordinary clear float glass had been slid out. Dust outlined the missing pane's dimensions precisely.
+
+So: one clear pane among hundreds of milky ones, on the southern roof slope. But a clear pane alone wasn't enough. Clear glass lets a beam of direct sun through, yes — but that beam should sweep westward across the floor as the morning progresses, like sunlight through any window. Why should it park itself in the northwest corner at noon?
+
+The answer came from the building itself. Imogen spent an afternoon on the roof with an inclinometer and a compass. The southern slope faced due south, pitched at twenty-eight degrees. Directly beyond the northwest corner of the palm house, barely four meters away, stood the garden's newer annex — a 1990s utility block clad, for reasons known only to its architects, in brushed stainless steel panels. The panels caught the morning sun like a furnace door.
+
+At low morning angles, she worked out, a beam passing through the clear pane fell either on the central aisle or was intercepted by the great iron ridge beam of the Victorian roof. As the sun climbed toward due south, the projected patch of light slid deeper into the house and narrowed, squeezed between the shadows of the glazing bars, until — for roughly seventy minutes bracketing solar noon — it landed entirely within the northwest corner. There the annex's steel cladding, blazing with reflected sunlight, bounced a secondary flood of glare back through the corner's glass wall, stacking reflected light on top of direct light until that one wedge of floor was receiving several times the brightness of the rest of the entire diffuse, pearlescent house.
+
+Plants do not lean toward the sun. They lean toward the *gradient* — auxin drains away from the brightest-lit side of a stem, cells elongate in shadow, and the shoot curves toward whichever direction offers the most photons. Under uniform opal light, that was straight up. But give them one corner eight times brighter than everything else, and biology did the rest. The whole house turned toward it, the way a crowd turns toward a shout in a quiet room. The bleached parallelogram on the gravel was simply the beam's footprint, burning the paint off the stones week by week — sun scorch, not sabotage, though Imogen could see how the weekend staff, finding a dead white rectangle with crisp geometric edges, had leapt to accusations. It was, she reflected, the perfect misread clue: evidence of harm shaped exactly like evidence of a crime.
+
+She did not announce any of this. On Friday, at half past eleven, she asked Tomas, Priya, and both feuding weekend staff to meet her in the palm house, and she said only: "Watch the corner."
+
+At 11:52, a blade of light fell through the south slope and lay across the aisle, hard-edged and ferociously bright amid the soft grey glow of the opal glass. Imogen held up a sheet of white card, and the beam struck it like a blow — a searing parallelogram, identical in shape to the scar on the gravel. She walked the card slowly toward the northwest corner, and the patch of light traveled with it, sliding up the empty galvanized shelf, flaring brighter still as the annex's steel skin threw its own reflected glare through the corner glass. Even from three meters away, the watchers lifted their hands against it.
+
+"That's what they're looking at," Imogen said. "That's the loudest thing in the room."
+
+Then she took a plywood sheet from Tomas's arms and propped it against the corner bench, cutting the beam off at its source. They waited. It took eleven minutes — long enough for everyone to make tea of the occasion — but bit by bit, the ferns eased their shoulders back, the fuchsias squared themselves, and by 12:20 every plant in the house stood pointing at the sky like a proper collection again.
+
+Priya laughed out loud. One of the weekend staff apologized to the other. Tomas looked at the plywood, at the corner, at the pane of clear glass glowing innocently forty feet up on the southern slope.
+
+"The roofer," he said, and put his head in his hands.
+
+"He used what was on his van," Imogen said. "It stopped the leak. It just also gave the plants something worth turning around for." She handed Tomas the work order she'd written that morning: replace pane forty-seven with hammered opal glass to match original; inspect annex sightline annually. "Same glass as the Victorians used. They knew their light better than we do."
+
+The following Wednesday, the new pane went in. At solar noon, the palm house stayed evenly, pearly bright, and the northwest corner held nothing at all — which was, Imogen noted in her report, exactly what a greenhouse corner ought to hold.
+
+Nothing, except plants standing up straight.

@@ -1,0 +1,43 @@
+{
+  "source_id": "glm_5_2",
+  "prompt_id": "p04",
+  "requested_model": "z-ai/glm-5.2",
+  "returned_model": "z-ai/glm-5.2",
+  "provider": "Novita",
+  "created_at_utc": "2026-08-26T02:44:53.613448+00:00",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 5468,
+    "total_tokens": 5550,
+    "cost": 0.01281222,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01281222,
+      "upstream_inference_prompt_cost": 6.0844e-05,
+      "upstream_inference_completions_cost": 0.012751376
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 4345,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "settings": {
+    "protocol_version": 2,
+    "max_tokens": 6000,
+    "reasoning_effort": "native default",
+    "reasoning_excluded": false,
+    "require_parameters": false,
+    "tools": "none",
+    "temperature": "provider default",
+    "top_p": "provider default"
+  },
+  "final_answer_characters": 6567
+}

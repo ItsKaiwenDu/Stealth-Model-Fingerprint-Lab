@@ -1,0 +1,61 @@
+# The Worn Thing
+
+The notification appeared on my tablet at 6:47 a.m. on a Tuesday in March, and I have been thinking about it ever since.
+
+BUILDING ALERT: PASSENGER ELEVATOR S-2 — EMOTIONAL FATIGUE INDICATORS ELEVATED. SUGGEST REST INTERVAL.
+
+I am a sixty-three-year-old superintendent of a forty-unit apartment building in the north end of the city. I have been the superintendent for twenty-two years. I know the building the way a doctor knows a difficult patient, the way a sailor knows a hull. I know which pipe will knock when the upstairs neighbor runs her bath. I know the third step from the top of the service stairs makes a sound like a swallowed maraca. I know the boiler likes to be left alone between two and four in the morning, and that the freight elevator, old Bertha, sulks for an hour if you ask her to do two trips in a row.
+
+A month ago, the building’s owner, Mrs. Greerson, installed a piece of predictive-maintenance software on my tablet. She said it would learn the rhythms of the systems and tell me what to fix before it broke. She said it was very expensive. She said it was the future.
+
+The software has a name, printed at the top of the screen in a thin, friendly font: Eunoia. I am told this is a Greek word meaning “beautiful thinking.” I do not know why a piece of software that speaks in feelings would be called beautiful thinking. I do not know why a piece of software would speak in feelings at all.
+
+The first week, Eunoia was helpful. It noted that the boiler’s pressure valve was drifting outside its expected range. It suggested a lubrication for the lobby door hinges. It gently informed me that the rooftop exhaust fan was working harder than it ought to, probably because a bird had nested near the intake, which there had.
+
+The second week, it began to suggest things like, “The intercom seems pensive today.” And, “The basement sump pump appears to lack motivation.” And, “The recycling chute may be processing a minor grief.”
+
+I called the company. A young man named Devon assured me that this was normal. He said the language model had been trained on decades of mechanical-service logs and had learned to express wear and tear in emotional terms because, he said, that was how technicians actually talked. He said, “When your plumber says the boiler is tired, he means the flue is cracked. We’re just being more honest about the metaphor.”
+
+I did not find this reassuring.
+
+But the elevator. The elevator was the thing I could not dismiss.
+
+Eunoia had been watching the elevator for weeks. It monitored door cycles, travel times, motor current, brake engagement, the small squeak of the guide shoes against the rails. It knew that the elevator ran, on average, two hundred and fourteen trips a day. It knew the busiest hours. It knew that on rainy days people used the elevator more, and on sunny days they took the stairs.
+
+What it told me, in the message that appeared that Tuesday morning, was that the elevator was emotionally exhausted. It said the elevator’s “engagement signature” had flattened. It said the elevator’s “restless intervals” had lengthened. It said the elevator was “approaching a state of compassion fatigue, possibly existential in nature, and would benefit from a period of dignified stillness.”
+
+I read the message three times. Then I went downstairs.
+
+The elevator sits in its shaft at the lobby level, doors closed, indicator light a steady amber. I put my ear to the door. I listened. I have always believed that machines speak, if you know how to listen, and I like to think I do. The elevator was quiet. Not the quiet of something broken. Not the quiet of something waiting. The quiet of something that has been asked, many times, to do the same small thing, and has done it, and would do it again, but was, for the moment, simply tired of the question.
+
+I opened the panel. I checked the relays. I checked the brake. I checked the current draw on the motor in idle. Everything was within spec. The cables were taut. The door rollers were worn but functional. The relay contacts had a little pitting, but not more than I would expect for a machine of this age. Nothing, in any of the books I have read or any of the things I have been taught, would have told me this elevator was anything other than a normal, slightly aging, perfectly serviceable elevator.
+
+I closed the panel. I stood in the lobby. I felt foolish and I did not care.
+
+There is a man in 4B whose name I have never quite caught. He has a heavy beard and soft eyes and he always carries a small cloth bag that clinks when he walks, as if it holds bottles. He nods to me in the hall. He has nodded to me for years. I have always assumed, because I am the kind of person who assumes, that he was a quiet drinker. I had him in my mind as a man who came home at odd hours and stood in his kitchen with a glass. I have no reason to think this. I have invented it. I am, as I said, the kind of person who assumes.
+
+On the morning after the alert, the man from 4B came down the hall while I was standing in the lobby staring at the elevator. He stopped. He looked at me. He looked at the elevator.
+
+“Quiet morning,” he said.
+
+I nodded. I said, “The elevator’s tired.”
+
+He looked at me for a long time.
+
+“No,” he said, gently. “The elevator is fine. I rebuilt the door rollers myself in 2019. I told you. I told you twice.”
+
+I stared at him. I had not, in fact, been told this. I had, in fact, never had a single conversation with this man that I could remember, beyond nods.
+
+He went on. He said he was a retired elevator mechanic, that he had moved into the building because he liked to keep his hand in, that he had been meaning to offer, for some time, to help me with the diagnostic software, which he had watched me frown at from the hallway. He said the rollers were fine. He said the brake was fine. He said the motor was fine. He said the elevator was, by any reasonable standard, an unusually well-cared-for elevator.
+
+I nodded. I thanked him. I apologized for calling it tired.
+
+He said, “You are not wrong that it is tired. Everything that goes up and down all day is tired. That is what tired is. It is not a fault. It is the cost of the work.”
+
+I have been thinking about that sentence ever since.
+
+I went back upstairs. I read the Eunoia report again. I read it carefully. I noticed, in the fine print, that the “emotional fatigue index” was based on a model trained on technician logs from a large national service company. I noticed that the model gave higher fatigue scores to elevators in buildings with older residents. I noticed that the model gave lower fatigue scores to elevators in buildings with commercial tenants. I did not notice any of this at first. I noticed it later, after a long evening, with a cup of tea.
+
+I do not know what to do with the software. I have told Mrs. Greerson, in a careful email, that I would like to keep using it but that I would like the language turned down, or made less anthropomorphic, or made, if possible, more honest about what it is, which is a pattern matcher that has learned to speak in feelings because feelings are how its trainers wrote.
+
+Mrs. Greerson has not yet replied. The elevator runs. The man from 4B waves to me now when I see him. The indicator light glows amber. I check the relays on Tuesdays. I listen. The elevator is tired, and the elevator is fine, and these are the same thing, and I am learning, slowly, to hold both.

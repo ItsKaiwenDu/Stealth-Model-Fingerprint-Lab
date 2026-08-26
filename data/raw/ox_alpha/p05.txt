@@ -1,0 +1,53 @@
+# Fatigue Index
+
+I have been the superintendent of the Halsey Arms for eleven years, and in that time I have kept a spiral notebook for every machine in the building. The boiler gets its own notebook. The sump pumps share one. The elevator, Car 2, has had three notebooks, all filled in the same blue ballpoint, because I buy them in a twelve-pack and consistency matters more to me than most things. When you write down the date, the reading, and the weather, you start to see patterns that other men call superstition. They are not superstition. They are just patterns nobody bothered to count.
+
+So when management installed the new predictive-maintenance platform in March — Sentinel Building Intelligence, version 7.2 — I did not resent it the way the plumbers expected me to. A program that watches the machinery while I sleep sounded like a gift. I read the entire manual on a Tuesday night, both appendices, including the section on the Natural Language Reporting Module, which I will admit I skimmed.
+
+The NLRM, the manual explained, translated raw telemetry into plain English so that board members would not have to look at graphs. Vibration signatures above threshold became "stress." Duty cycles beyond design limits became "fatigue." I understood this was a metaphor. Machines do not have feelings. Machines have bearings, windings, clearances, and tolerances, and if you respect those four things they will outlive you.
+
+On April ninth, Sentinel sent its first alert about Car 2:
+
+**EMOTIONAL EXHAUSTION DETECTED. UNIT RECOMMENDED FOR COMPASSIONATE MONITORING.**
+
+I read it three times. Then I put on my boots and went to the machine room, because whatever words a computer chooses, there is a number underneath, and numbers are my native language.
+
+The numbers said this. Hoist motor current draw was up four percent against baseline. Door operator cycle time had drifted from 4.1 seconds to 5.3. There was a harmonic at 47 hertz in the drive sheave signature that had not been there in January, small, steady, like a man humming through his teeth. Individually, nothing. Together, a picture. The car was working harder than it used to, and it was telling the truth about it in four percent increments.
+
+I spent the weekend on it. I cleaned and re-gapped the door sensors, which had collected enough hallway dust to plant something in. I re-lubricated the governor cable. I torqued every accessible fastener to spec and wrote each value in the notebook, because a torque wrench that isn't written down is only half a torque wrench. On Monday morning Sentinel reported:
+
+**CONDITION IMPROVED. EMOTIONAL EXHAUSTION PERSISTS AT REDUCED SEVERITY. UNIT REMAINS WEARY.**
+
+Weary. I sat in the machine room on an overturned paint bucket and considered the word. Somewhere in Silicon Valley a product designer had decided that maintenance alerts should sound like greeting cards, and somewhere in the Halsey Arms a forty-year-old traction machine was being described in terms usually reserved for hospice patients.
+
+The building noticed too. Not the report — tenants don't read reports — but the mood of the thing travels. Mrs. Ferreira on the sixth floor stopped me by the mailboxes on Wednesday. She is eighty-four and rides Car 2 six times a day whether she has anywhere to go or not.
+
+"That elevator is tired, mijo," she told me, pressing her hand flat against my forearm. "You can hear it. At night especially. It sighs when I'm in it alone. Like it doesn't want to carry anybody anymore."
+
+I nodded the way you nod at old women in hallways, and I made a mistake I am still embarrassed by. I decided she was talking about herself. I know how buildings lean on their oldest tenants, how the fourth floor becomes a country you can't leave. I thought: she projects her fatigue onto the machine, the way lonely men talk to their trucks. So I did what I thought kindness required. I replaced the corridor light on six with a warmer bulb. I started stopping by her apartment with coffee grounds I pretended I'd accidentally bought decaf versions of. I asked about Oaxaca. She answered graciously, every time, and every time she steered back to the same sentence.
+
+"It sighs. Listen for yourself. Tonight, when it's quiet."
+
+I listened, eventually, because listening to machines is the one form of listening I have never failed at. Thursday at 11:40 p.m., after the last tenant was home, I stood inside the car with the doors open and rode it top to bottom three times with my eyes shut. On the third descent I heard it.
+
+A long exhalation, low and airy, arriving just after the car leveled at two. Not the motor. Not the brakes. I traced it to the door operator, where a drive belt had worn a flat spot wide enough to whistle against the sheave under load, exhaling a puff of compressed air through the gap each time the operator cycled. Louder at night because nights are quiet. More noticeable to someone riding alone because a woman alone in a car attends to sound the way I attend to torque values. Mrs. Ferreira had diagnosed my elevator from her hallway before my quarter-million-dollar software platform finished warming up. I had heard her say it four times and filed it under grief.
+
+The belt took twenty minutes to replace. The sigh went away. I stood in the lobby afterward feeling something I don't have a clean word for — the closest the NLRM would come, I suppose, is remorse, severity moderate.
+
+The exhaustion itself was harder. Sentinel kept flagging it, week after week, even after the belt, even after I rebalanced the doors and re-greased the guide shoes. Finally I called the vendor's support line and got a technician named Doug, who talked the way I imagine the manual's authors talk.
+
+"The emotional vocabulary is just a wrapper," he said. "Underneath, the model tracks cumulative operational strain. Your car is thirty-nine years old. Its duty profile exceeds original design assumptions by — hold on — sixty-two percent, mostly from food deliveries since 2020. Multiple subsystems are simultaneously operating past their service intervals. The model classifies that combination as exhaustion because, functionally, that's what it is. Everything works. Nothing works easily."
+
+"So it needs rest," I said.
+
+"There's no such procedure," Doug said, and then, hearing himself: "I mean, you can't schedule downtime for a component that never stops being load-bearing. What you can do is reduce the strain. Fewer cycles per day, lighter loads, shorter runs. Or refurbish. The label won't clear either way. It's cumulative."
+
+Cumulative. Eleven years of notebooks suddenly arranged themselves behind the word. Every year the building added weight — packages, residents, another floor of short-term leases — and every year I compensated, and the compensation itself accumulated, gaskets and adjustments layered over a machine asked to be younger than it was. I had been treating symptoms with such precision that I'd missed the diagnosis sitting in plain arithmetic.
+
+I brought it to the board with printouts. I did not use the word exhaustion, though I taped Sentinel's alert to the last page, because sometimes a silly sentence carries a true number and the true number does the arguing. The vote for refurbishment passed nine to one. Parts were ordered in June. The contractor starts in September.
+
+Mrs. Ferreira noticed the belt fix before anyone else. She cornered me by the mailboxes and said, "It stopped sighing. What did you do?" And I told her the truth: that she had caught what I hadn't, that her ears were better instrumentation than my software, and that I owed her an apology for the coffee. She waved off the apology and accepted a standing invitation to inspect the machine room after the renovation, which I intend to honor, and during which I intend to teach her what the 47-hertz hum sounds like when it's gone.
+
+Tonight I rode the car once more before bed, notebook in hand, taking baseline readings for the contractor. Current draw within spec. Cycle time 4.0 seconds. The harmonic faint but present, patient, waiting for September like everything else in this building. In the margin next to the readings I wrote the date and one line: *She was right about the sigh.*
+
+Sentinel still lists Car 2 as exhausted. I no longer argue with it. Some conditions don't clear until the underlying load is lifted, and until then, the honest thing to do is keep counting.

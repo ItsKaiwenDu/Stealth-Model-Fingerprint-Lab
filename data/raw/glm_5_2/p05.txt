@@ -1,0 +1,65 @@
+# Predictive Maintenance
+
+When the board approved the software upgrade, I told them it would change how we thought about the building. They thought I meant efficiency. I meant something closer to philosophy.
+
+The system is called SENTINEL. It arrived on a flash drive in a padded envelope, which I thought was a poor way to ship software, but the vendor said it was "air-gapped for integrity." I installed it on the dedicated terminal in my basement office, between the boiler logs and the spare fuse box. It ingested three years of sensor data in forty seconds and then asked me, in a small gray dialogue box, whether I wanted to enable "holistic mode." I clicked yes. I have always been a person who clicks yes.
+
+Within a week SENTINEL had flagged a vibration anomaly in the boiler feed pump, identified a slow leak in a roof drain cleanout, and predicted that the lobby door closer would fail in nine to twelve days. I replaced the closer on day eight. The old one had a cracked piston. I felt the crack with my thumbnail before I saw it. SENTINEL was right. SENTINEL was always right.
+
+Then on a Tuesday it flagged the elevator.
+
+The Car 2 report was unusual. Not the format—it used the same template as everything else—but the language. Under "Recommended Action" it said: "Allow rest. Reassess in 72 hours." Under "Root Cause Analysis" it said: "Accumulated affective load exceeding operational envelope. Emotional exhaustion suspected."
+
+I read it twice. I have worked with machines my entire adult life. I was a Navy machinist's mate before I was a super. I have listened to turbines and pumps and compressors the way some people listen to music, and I can tell you that machines do have states that look like fatigue, and states that look like distress, and that these states are measurable. Metal has moods. I do not mean this metaphorically. I mean that stress is a physical quantity and that strain is how a material responds, and that the words we use for human suffering—tension, stress, fatigue, creep—are engineering terms first.
+
+So I did not laugh at SENTINEL. I pulled the Car 2 logs.
+
+The data was strange. Car 2 had developed a pattern: on weekdays between 7:15 and 9:00 a.m., the door-close cycle was 0.3 seconds slower than Car 1. Same doors, same motors, same controller. SENTINEL had also flagged micro-stalls in the drive between the third and fourth floors, always ascending, always in that window. And the cab temperature sensor was registering spikes—brief, two-second jumps of four to six degrees that didn't correspond to passenger load or ambient temperature.
+
+I rode Car 2 for an hour that evening. I stood in it with my multimeter and my stethoscope and my clipboard. It behaved perfectly. But I noticed something SENTINEL had not flagged, because SENTINEL does not index for it: the car had a smell. Not mechanical. Not electrical. It smelled like the inside of a coat that has been worn too long. Stale fabric, stale breath, the ghost of a hundred mornings.
+
+I rode it again at 7:30 the next morning. This time it did the thing. Between three and four, a shudder—so slight that a passenger might think it was a breeze. The door-close at five was lazy. The fluorescent light in the cab flickered once, a single blink, as though it had almost decided not to.
+
+I went back to my office and told SENTINEL to keep monitoring. I asked it, typing carefully, "What do you mean by emotional exhaustion?" It responded with a chart. The chart showed vibration variance over thirty days, and it had mapped the variance against passenger load and door cycles. The correlation was not to usage. It was to what SENTINEL called "interaction density"—a metric it had invented, which combined passenger count, dwell time, door-hold button presses, and what it labeled "aborted departure events," meaning moments when someone reached for the door and then pulled back because they'd forgotten something.
+
+Interaction density peaked between 7:15 and 9:00. And Car 2's variance tracked it. Not Car 1. Only Car 2.
+
+I have a theory. Car 2 is the one closest to the mailboxes. People get in, press their floor, then jab the door-open button and step back out to check their mail. Then they get back in. Car 2 absorbs more aborted departures than Car 1—about eleven per morning, I measured. Each one is a door cycle that starts and stops, a motor that torques and relaxes, a controller that issues a command and cancels it. Eleven times. Every morning. The drive between three and four is where the car is heaviest with passengers and where the counterweight is least helpful, so that is where the micro-stall shows up.
+
+That is the machine explanation. SENTINEL's explanation is that the elevator is emotionally exhausted. I am not sure those are different explanations.
+
+Mrs. Kowalczyk on 5R stopped me in the hall on Thursday. She is eighty-one and has lived here since 1987 and believes that the building and everything in it answers to her personally. "The elevator is acting strange," she said.
+
+"It's within tolerance," I said.
+
+"I'm telling you it's sad," she said. "I can feel it. It sighs between three and four."
+
+"That's the drive," I said. "There's a micro-stall. I'm going to adjust the brake timing."
+
+She looked at me the way my first wife looked at me when I tried to explain why the dishwasher was making a sound, which was a look that said: you hear the sound but you do not hear what it means.
+
+"You adjust the brake," she said. "And then you listen to it."
+
+I adjusted the brake timing on Friday afternoon. I cleaned the door rollers and tightened the cab light fixture and ran twelve empty cycles. Car 2 performed perfectly. I felt good. I went downstairs and checked SENTINEL.
+
+New alert. Same template. "Brake adjustment has improved mechanical response. Affective load unchanged. Emotional exhaustion persists. Recommend extended idle period."
+
+I sat in my office for a while. I could hear Car 2 through the shaft—someone going up to six, the rope traction and the relay clack and then the silence. The building was quiet. It was Friday evening. People were going out or staying in. The elevator was doing what it always did, carrying them.
+
+On Saturday I did something I have never done. I took Car 2 out of service for the weekend. I put up a sign that said "Scheduled Maintenance" and locked the landing doors. I left Car 1 running. The building has two elevators. One is enough for a weekend.
+
+I went up to Car 2 and sat in the cab with the lights on and the doors closed. I sat on the floor. I listened. The shaft was cool and smelled like oil and steel. I could hear the cables settling. I could hear the wind outside, the faintest whistle through the vent at the top of the shaft. I could hear the building breathing, which is the sound of pipes expanding as the heat cycles.
+
+I sat there for twenty minutes. Nothing happened. Of course nothing happened. It is an elevator.
+
+But when I came back down and checked SENTINEL, it had updated its status for Car 2. The flag was gone. The recommended action now read: "Monitor. Conditions nominal."
+
+I don't know if the rest helped the elevator. I know that the micro-stall between three and four did not reappear on Monday. I know that the door-close timing returned to parity with Car 1. I know that the temperature spikes stopped. SENTINEL says the idle period allowed the drive controller to complete a thermal equalization cycle. I believe that. I also believe SENTINEL when it says the elevator was emotionally exhausted, because I know what that means in metal and in current and in the number of times a door is asked to open and then close again without anyone leaving.
+
+On Monday evening Mrs. Kowalczyk held the elevator for me. Car 2. "It's better," she said.
+
+"Yes," I said.
+
+"You listened to it."
+
+I had. I'm not sure what I heard. But I have adjusted the maintenance schedule so that Car 2 rests every other weekend, and SENTINEL has not flagged it since.
