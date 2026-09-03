@@ -1,0 +1,6 @@
+{
+  "candidate_a": {"model": "provider/candidate-a", "max_tokens": 6000},
+  "candidate_b": {"model": "provider/candidate-b", "max_tokens": 6000},
+  "candidate_c": {"model": "provider/candidate-c", "max_tokens": 6000},
+  "mystery_model": {"model": "stealth/your-model", "max_tokens": 6000}
+}

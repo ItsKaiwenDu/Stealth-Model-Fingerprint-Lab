@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
-"""Resumable OpenRouter collector for the Ox Alpha fingerprint experiment."""
+"""Resumable Chat Completions collector for a writing-fingerprint study.
+
+The default endpoint is OpenRouter, but any OpenAI-compatible Chat Completions
+endpoint can be supplied with --base-url.  It saves only final visible answers
+and sanitized metadata; never put an API key in a study directory.
+"""
 
 from __future__ import annotations
 
 import argparse
+import csv
+import hashlib
 import json
 import os
 import re
@@ -18,11 +25,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
-PROMPT_HEADING = re.compile(r"^###\s+(p\d{2})\b", re.IGNORECASE)
-NATIVE_REASONING_SOURCES = {"glm_5_2", "mimo_v2_5", "minimax_m3"}
-PROTOCOL_VERSION = 2
+DEFAULT_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+PROMPT_HEADING = re.compile(r"^###\s+([a-z][a-z0-9_-]*)\b", re.IGNORECASE)
+PROMPT_ID_RE = re.compile(r"^[a-z][a-z0-9_-]*$")
+PROTOCOL_VERSION = 3
 REQUEST_TIMEOUT_SECONDS = 600
 
 
@@ -42,12 +48,67 @@ def tls_context() -> ssl.SSLContext:
 TLS_CONTEXT = tls_context()
 
 
-def load_models() -> dict[str, str]:
-    return json.loads((ROOT / "openrouter_models.json").read_text(encoding="utf-8"))
+def resolve_study(path: str) -> Path:
+    study = Path(path).expanduser().resolve()
+    if not study.is_dir():
+        raise ValueError(f"study directory does not exist: {study}")
+    return study
 
 
-def load_prompts() -> dict[str, str]:
-    lines = (ROOT / "prompts.md").read_text(encoding="utf-8").splitlines()
+def load_models(study: Path) -> dict[str, dict]:
+    """Load source IDs to request specifications.
+
+    A source may be a plain model string for a compact setup, or an object with
+    model, max_tokens, reasoning, provider, temperature, top_p, and/or seed.
+    """
+    primary = study / "models.json"
+    legacy = study / "openrouter_models.json"
+    path = primary if primary.exists() else legacy
+    if not path.exists():
+        raise ValueError(f"missing models.json in {study}")
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"invalid JSON in {path}: {exc}") from exc
+    if not isinstance(raw, dict) or not raw:
+        raise ValueError(f"{path} must be a non-empty object")
+    if "sources" in raw:
+        raw = raw["sources"]
+    if not isinstance(raw, dict) or not raw:
+        raise ValueError(f"{path} sources must be a non-empty object")
+    models: dict[str, dict] = {}
+    for source, spec in raw.items():
+        if not isinstance(source, str) or not PROMPT_ID_RE.match(source):
+            raise ValueError(f"invalid source ID in {path}: {source!r}")
+        if isinstance(spec, str):
+            spec = {"model": spec}
+        if not isinstance(spec, dict) or not isinstance(spec.get("model"), str) or not spec["model"].strip():
+            raise ValueError(f"model spec for {source} must contain a non-empty 'model' string")
+        if "max_tokens" in spec and (not isinstance(spec["max_tokens"], int) or spec["max_tokens"] < 1):
+            raise ValueError(f"model spec for {source} has an invalid max_tokens value")
+        models[source] = spec
+    return models
+
+
+def load_manifest_source_ids(study: Path) -> set[str]:
+    path = study / "manifest.csv"
+    if not path.exists():
+        raise ValueError(f"missing study manifest: {path}")
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows or "source_id" not in rows[0]:
+        raise ValueError(f"{path} must contain at least one source_id row")
+    sources = {row["source_id"].strip() for row in rows}
+    if any(not PROMPT_ID_RE.match(source) for source in sources) or len(sources) != len(rows):
+        raise ValueError(f"{path} contains invalid or duplicate source_id values")
+    return sources
+
+
+def load_prompts(study: Path) -> dict[str, str]:
+    path = study / "prompts.md"
+    if not path.exists():
+        raise ValueError(f"missing prompt battery: {path}")
+    lines = path.read_text(encoding="utf-8").splitlines()
     prompts: dict[str, str] = {}
     current: str | None = None
     buffer: list[str] = []
@@ -57,6 +118,8 @@ def load_prompts() -> dict[str, str]:
             if current:
                 prompts[current] = "\n".join(buffer).strip()
             current = match.group(1).lower()
+            if current in prompts:
+                raise ValueError(f"duplicate prompt ID: {current}")
             buffer = []
         elif current:
             if line.startswith("## "):
@@ -67,27 +130,31 @@ def load_prompts() -> dict[str, str]:
                 buffer.append(line)
     if current:
         prompts[current] = "\n".join(buffer).strip()
-    if len(prompts) != 30 or any(not text for text in prompts.values()):
-        raise ValueError(f"Expected 30 non-empty prompts, found {len(prompts)}")
+    if not prompts or any(not text for text in prompts.values()):
+        raise ValueError(f"Expected one or more non-empty prompts, found {len(prompts)}")
     return prompts
 
 
 def prompt_selection(args, available: dict[str, str]) -> list[str]:
     if args.prompts:
         selected = [item.strip().lower() for item in args.prompts.split(",") if item.strip()]
+    elif args.all_prompts:
+        selected = sorted(available)
     elif args.phase == 1:
-        selected = [f"p{i:02d}" for i in range(1, 13)]
+        selected = [f"p{i:02d}" for i in range(1, 13) if f"p{i:02d}" in available]
     elif args.phase == 2:
-        selected = [f"p{i:02d}" for i in range(13, 31)]
+        selected = [f"p{i:02d}" for i in range(13, 31) if f"p{i:02d}" in available]
     else:
-        raise ValueError("Choose --phase 1, --phase 2, or --prompts p01,p02")
+        raise ValueError("Choose --all-prompts, --phase 1, --phase 2, or --prompts p01,p02")
+    if not selected:
+        raise ValueError("prompt selection did not match any prompts in prompts.md")
     unknown = [item for item in selected if item not in available]
     if unknown:
         raise ValueError(f"Unknown prompt IDs: {', '.join(unknown)}")
     return selected
 
 
-def source_selection(args, models: dict[str, str]) -> list[str]:
+def source_selection(args, models: dict[str, dict]) -> list[str]:
     selected = list(models) if args.all_sources else (args.source or [])
     if not selected:
         raise ValueError("Choose one or more --source values, or --all-sources")
@@ -112,26 +179,25 @@ def final_text(message: dict) -> str:
     return str(content).strip()
 
 
-def request_completion(api_key: str, model: str, prompt: str, use_reasoning_control: bool,
-                       label: str, max_attempts: int = 8):
+def request_payload(spec: dict, prompt: str) -> dict:
     payload = {
-        "model": model,
+        "model": spec["model"],
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 16000 if use_reasoning_control else 6000,
-        "provider": {"require_parameters": use_reasoning_control},
+        "max_tokens": spec.get("max_tokens", 6000),
         "stream": False,
     }
-    if use_reasoning_control:
-        payload["reasoning"] = {"effort": "high", "exclude": True}
+    for field in ("temperature", "top_p", "seed", "reasoning", "provider"):
+        if field in spec and spec[field] is not None:
+            payload[field] = spec[field]
+    return payload
+
+
+def request_completion(api_url: str, headers: dict[str, str], spec: dict, prompt: str,
+                       label: str, max_attempts: int = 8):
+    payload = request_payload(spec, prompt)
     body = json.dumps(payload).encode("utf-8")
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://localhost/ox-alpha-fingerprint",
-        "X-Title": "Ox Alpha writing fingerprint experiment",
-    }
     for attempt in range(1, max_attempts + 1):
-        request = urllib.request.Request(API_URL, data=body, headers=headers, method="POST")
+        request = urllib.request.Request(api_url, data=body, headers=headers, method="POST")
         failure = "unknown temporary failure"
         delay = None
         try:
@@ -143,8 +209,8 @@ def request_completion(api_key: str, model: str, prompt: str, use_reasoning_cont
             detail = exc.read().decode("utf-8", errors="replace")[:1000]
             retryable = exc.code in {408, 409, 429, 500, 502, 503, 504}
             if not retryable or attempt == max_attempts:
-                raise RuntimeError(f"OpenRouter HTTP {exc.code}: {detail}") from exc
-            failure = f"OpenRouter HTTP {exc.code}: {detail}"
+                raise RuntimeError(f"Chat Completions HTTP {exc.code}: {detail}") from exc
+            failure = f"Chat Completions HTTP {exc.code}: {detail}"
             if exc.code == 429:
                 retry_after = exc.headers.get("Retry-After")
                 try:
@@ -154,7 +220,7 @@ def request_completion(api_key: str, model: str, prompt: str, use_reasoning_cont
         except (urllib.error.URLError, TimeoutError) as exc:
             is_timeout = isinstance(exc, TimeoutError) or "timed out" in str(exc).lower()
             if attempt == max_attempts or (is_timeout and attempt >= 2):
-                raise RuntimeError(f"OpenRouter network error: {exc}") from exc
+                raise RuntimeError(f"Chat Completions network error: {exc}") from exc
             failure = f"network error: {exc}"
         if delay is None:
             delay = min(60, 2 ** attempt)
@@ -163,15 +229,15 @@ def request_completion(api_key: str, model: str, prompt: str, use_reasoning_cont
     raise AssertionError("unreachable")
 
 
-def request_with_heartbeat(api_key: str, model: str, prompt: str,
-                           use_reasoning_control: bool, label: str):
+def request_with_heartbeat(api_url: str, headers: dict[str, str], spec: dict, prompt: str,
+                           label: str):
     """Run a blocking request while showing that the process is still alive."""
     outcome: dict[str, object] = {}
 
     def worker() -> None:
         try:
             outcome["result"] = request_completion(
-                api_key, model, prompt, use_reasoning_control, label
+                api_url, headers, spec, prompt, label
             )
         except BaseException as exc:
             outcome["error"] = exc
@@ -189,7 +255,8 @@ def request_with_heartbeat(api_key: str, model: str, prompt: str,
     return outcome["result"]
 
 
-def save_response(source: str, prompt_id: str, model: str, response: dict, payload: dict) -> None:
+def save_response(study: Path, source: str, prompt_id: str, spec: dict, response: dict,
+                  payload: dict) -> None:
     choices = response.get("choices") or []
     if not choices:
         raise RuntimeError(f"No choices in response: {json.dumps(response)[:1000]}")
@@ -199,21 +266,21 @@ def save_response(source: str, prompt_id: str, model: str, response: dict, paylo
         usage = response.get("usage") or {}
         completion_details = usage.get("completion_tokens_details") or {}
         raise EmptyFinalAnswerError(
-            "OpenRouter returned an empty final answer "
+            "The Chat Completions endpoint returned an empty final answer "
             f"(provider={response.get('provider')!r}, "
             f"finish_reason={choices[0].get('finish_reason')!r}, "
             f"completion_tokens={usage.get('completion_tokens')!r}, "
             f"reasoning_tokens={completion_details.get('reasoning_tokens')!r})"
         )
-    raw_dir = ROOT / "data" / "raw" / source
-    metadata_dir = ROOT / "data" / "metadata" / source
+    raw_dir = study / "data" / "raw" / source
+    metadata_dir = study / "data" / "metadata" / source
     raw_dir.mkdir(parents=True, exist_ok=True)
     metadata_dir.mkdir(parents=True, exist_ok=True)
     (raw_dir / f"{prompt_id}.txt").write_text(text + "\n", encoding="utf-8")
     metadata = {
         "source_id": source,
         "prompt_id": prompt_id,
-        "requested_model": model,
+        "requested_model": spec["model"],
         "returned_model": response.get("model"),
         "provider": response.get("provider"),
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -222,13 +289,16 @@ def save_response(source: str, prompt_id: str, model: str, response: dict, paylo
         "settings": {
             "protocol_version": PROTOCOL_VERSION,
             "max_tokens": payload["max_tokens"],
-            "reasoning_effort": (payload.get("reasoning") or {}).get("effort", "native default"),
-            "reasoning_excluded": (payload.get("reasoning") or {}).get("exclude", False),
-            "require_parameters": payload["provider"]["require_parameters"],
+            "reasoning": payload.get("reasoning"),
+            "provider": payload.get("provider"),
+            "temperature": payload.get("temperature", "provider default"),
+            "top_p": payload.get("top_p", "provider default"),
+            "seed": payload.get("seed", "provider default"),
             "tools": "none",
-            "temperature": "provider default",
-            "top_p": "provider default",
         },
+        "prompt_sha256": hashlib.sha256(
+            (payload["messages"][0]["content"] + "\n").encode("utf-8")
+        ).hexdigest(),
         "final_answer_characters": len(text),
     }
     (metadata_dir / f"{prompt_id}.json").write_text(
@@ -238,14 +308,31 @@ def save_response(source: str, prompt_id: str, model: str, response: dict, paylo
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", type=int, choices=[1, 2])
-    parser.add_argument("--prompts", help="Comma-separated IDs, e.g. p01,p02")
-    parser.add_argument("--source", action="append", help="Source ID; repeat as needed")
-    parser.add_argument("--all-sources", action="store_true")
+    parser.add_argument(
+        "--study", default=".",
+        help="Study directory containing manifest.csv, models.json, and prompts.md (default: current directory)",
+    )
+    prompt_group = parser.add_mutually_exclusive_group()
+    prompt_group.add_argument("--phase", type=int, choices=[1, 2])
+    prompt_group.add_argument("--prompts", help="Comma-separated IDs, e.g. p01,p02")
+    prompt_group.add_argument("--all-prompts", action="store_true", help="Collect every prompt in prompts.md")
+    source_group = parser.add_mutually_exclusive_group()
+    source_group.add_argument("--source", action="append", help="Source ID; repeat as needed")
+    source_group.add_argument("--all-sources", action="store_true")
     parser.add_argument(
         "--workers", type=int, default=1,
         help="Number of models to request concurrently per prompt (1-8; default: 1)",
     )
+    parser.add_argument(
+        "--base-url", default=DEFAULT_API_URL,
+        help="OpenAI-compatible /chat/completions endpoint (default: OpenRouter)",
+    )
+    parser.add_argument(
+        "--api-key-env", default="OPENROUTER_API_KEY",
+        help="Environment variable holding the API key (default: OPENROUTER_API_KEY)",
+    )
+    parser.add_argument("--referer", help="Optional HTTP-Referer header, useful for OpenRouter")
+    parser.add_argument("--title", help="Optional X-Title header, useful for OpenRouter")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
     return parser.parse_args()
@@ -257,10 +344,17 @@ def main() -> int:
         print("Configuration error: --workers must be between 1 and 8", file=sys.stderr)
         return 2
     try:
-        models = load_models()
-        prompts = load_prompts()
+        study = resolve_study(args.study)
+        models = load_models(study)
+        manifest_sources = load_manifest_source_ids(study)
+        prompts = load_prompts(study)
         selected_prompts = prompt_selection(args, prompts)
         selected_sources = source_selection(args, models)
+        if args.all_sources and set(models) != manifest_sources:
+            raise ValueError("--all-sources requires models.json to cover exactly the manifest source IDs")
+        unlisted = [source for source in selected_sources if source not in manifest_sources]
+        if unlisted:
+            raise ValueError(f"selected sources are absent from manifest.csv: {', '.join(unlisted)}")
     except ValueError as exc:
         print(f"Configuration error: {exc}", file=sys.stderr)
         return 2
@@ -268,7 +362,7 @@ def main() -> int:
     jobs = []
     for prompt_id in selected_prompts:
         for source in selected_sources:
-            output = ROOT / "data" / "raw" / source / f"{prompt_id}.txt"
+            output = study / "data" / "raw" / source / f"{prompt_id}.txt"
             if output.exists() and not args.overwrite:
                 continue
             jobs.append((prompt_id, source))
@@ -276,26 +370,30 @@ def main() -> int:
     print(f"Selected {len(selected_prompts)} prompts × {len(selected_sources)} sources")
     print(f"Pending API requests: {len(jobs)}")
     for source in selected_sources:
-        print(f"  {source:24s} {models[source]}")
+        print(f"  {source:24s} {models[source]['model']}")
     if args.dry_run or not jobs:
         return 0
 
-    api_key = os.environ.get("OPENROUTER_API_KEY")
+    api_key = os.environ.get(args.api_key_env)
     if not api_key:
-        print("OPENROUTER_API_KEY is not set in this terminal.", file=sys.stderr)
+        print(f"{args.api_key_env} is not set in this terminal.", file=sys.stderr)
         return 2
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    if args.referer:
+        headers["HTTP-Referer"] = args.referer
+    if args.title:
+        headers["X-Title"] = args.title
 
     def collect_one(index: int, prompt_id: str, source: str) -> None:
-        model = models[source]
+        spec = models[source]
         label = f"{source} {prompt_id}"
         print(f"[{index}/{len(jobs)}] {label}", flush=True)
-        use_reasoning_control = source not in NATIVE_REASONING_SOURCES
         for response_attempt in range(1, 3):
             response, payload = request_with_heartbeat(
-                api_key, model, prompts[prompt_id], use_reasoning_control, label
+                args.base_url, headers, spec, prompts[prompt_id], label
             )
             try:
-                save_response(source, prompt_id, model, response, payload)
+                save_response(study, source, prompt_id, spec, response, payload)
                 return
             except EmptyFinalAnswerError as exc:
                 if response_attempt == 2:
@@ -330,7 +428,7 @@ def main() -> int:
                 print(f"FAILED {source} {job_prompt}: {exc}", file=sys.stderr)
             print("Progress is saved. Re-run the same command to resume.", file=sys.stderr)
             return 1
-    print("Collection complete. Next: python3 analyze.py validate")
+    print(f"Collection complete. Next: python3 analyze.py --study {study} validate")
     return 0
 
 

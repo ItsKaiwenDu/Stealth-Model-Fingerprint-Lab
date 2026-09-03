@@ -1,0 +1,5 @@
+source_id,role,display_name
+candidate_a,reference,Candidate A
+candidate_b,reference,Candidate B
+candidate_c,reference,Candidate C
+mystery_model,target,Unidentified model

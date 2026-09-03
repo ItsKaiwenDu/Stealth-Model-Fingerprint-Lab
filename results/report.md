@@ -1,4 +1,4 @@
-# Ox Alpha writing-fingerprint report
+# Ox Alpha → GLM-5.3-Flash retrospective — writing-fingerprint report
 
 **Status: SCREENING ONLY**
 
@@ -12,7 +12,7 @@ Reference macro recall: 72.7%
 
 | Rank | Candidate | Mean distance | 95% bootstrap interval | Bootstrap winner | Prompt votes |
 |---:|---|---:|---:|---:|---:|
-| 1 | GLM-5.3 | 1.8094 | 1.6536–2.0103 | 100.0% | 11 |
+| 1 | GLM-5.3-Flash | 1.8094 | 1.6536–2.0103 | 100.0% | 11 |
 | 2 | GLM-5.2 | 1.9363 | 1.7710–2.1442 | 0.0% | 0 |
 | 3 | Gemini 3.7 Flash | 1.9995 | 1.8520–2.1898 | 0.0% | 0 |
 | 4 | GLM-5 | 2.0036 | 1.8400–2.2277 | 0.0% | 0 |
@@ -22,7 +22,7 @@ Reference macro recall: 72.7%
 
 ## Interpretation
 
-The closest reference is **GLM-5.3**, followed by **GLM-5.2**. The leading candidate wins 100.0% of prompt-bootstrap resamples.
+The closest reference is **GLM-5.3-Flash**, followed by **GLM-5.2**. The leading candidate wins 100.0% of prompt-bootstrap resamples.
 
 This is not a final attribution. Collect more matched prompts and/or improve reference separability before treating the ranking as evidence.
 
@@ -34,6 +34,6 @@ This is not a final attribution. Collect more matched prompts and/or improve ref
 
 - Prompt IDs, not individual documents, are held out during validation.
 - Prompt-level mean style is removed using references before classification.
-- Ox Alpha is excluded from all training centroids.
+- The target is excluded from all feature scaling, prompt means, and training centroids.
 - Do not combine reasoning traces with final answers.
-- A close GLM result cannot distinguish a base model from a fine-tune or shared serving stack.
+- A close result cannot distinguish a base model from a fine-tune, system prompt, or shared serving stack.

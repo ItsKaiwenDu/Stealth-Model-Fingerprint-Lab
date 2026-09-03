@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local, paired-prompt writing fingerprint analysis for Ox Alpha.
+"""Local, paired-prompt writing-fingerprint analysis for a model study.
 
 This is deliberately deterministic and API-free. It measures surface style,
 not model internals, and must be interpreted as similarity evidence only.
@@ -20,10 +20,7 @@ from pathlib import Path
 import numpy as np
 
 
-ROOT = Path(__file__).resolve().parent
-RAW = ROOT / "data" / "raw"
-RESULTS = ROOT / "results"
-PROMPT_RE = re.compile(r"^p(\d{2})$")
+PROMPT_RE = re.compile(r"^[a-z][a-z0-9_-]*$")
 WORD_RE = re.compile(r"[A-Za-z]+(?:[’'][A-Za-z]+)?|\d+(?:[.,]\d+)*")
 SENTENCE_RE = re.compile(r"(?<=[.!?])(?:[\"'”’)]*)\s+(?=[A-Z0-9\"“‘])")
 
@@ -51,20 +48,62 @@ PUNCTUATION = [".", ",", ";", ":", "!", "?", "—", "–", "-", "(", ")", "\"", 
 SUFFIXES = ["ing", "ed", "ly", "ion", "tion", "ment", "ness", "ity", "ive", "ous", "able"]
 
 
-def load_manifest() -> list[dict[str, str]]:
-    with (ROOT / "manifest.csv").open(encoding="utf-8", newline="") as handle:
+def resolve_study(path: str) -> Path:
+    study = Path(path).expanduser().resolve()
+    if not study.is_dir():
+        raise ValueError(f"study directory does not exist: {study}")
+    return study
+
+
+def load_study_metadata(study: Path) -> dict[str, str]:
+    path = study / "study.json"
+    if not path.exists():
+        return {"title": "Writing-fingerprint study"}
+    try:
+        metadata = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"invalid JSON in {path}: {exc}") from exc
+    if not isinstance(metadata, dict):
+        raise ValueError(f"{path} must contain a JSON object")
+    title = metadata.get("title", "Writing-fingerprint study")
+    if not isinstance(title, str) or not title.strip():
+        raise ValueError(f"{path} field 'title' must be a non-empty string")
+    return {"title": title.strip(), **{k: str(v) for k, v in metadata.items() if k != "title"}}
+
+
+def load_manifest(study: Path) -> list[dict[str, str]]:
+    path = study / "manifest.csv"
+    if not path.exists():
+        raise ValueError(f"missing study manifest: {path}")
+    with path.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    if not rows or sum(row["role"] == "target" for row in rows) != 1:
-        raise ValueError("manifest.csv must contain references and exactly one target")
+    required = {"source_id", "role", "display_name"}
+    if not rows or not required.issubset(set(rows[0])):
+        raise ValueError("manifest.csv must contain source_id, role, and display_name columns")
+    source_ids = [row["source_id"].strip() for row in rows]
+    if any(not PROMPT_RE.match(source) for source in source_ids):
+        raise ValueError("manifest source_id values must use lowercase letters, digits, underscores, or hyphens")
+    if len(source_ids) != len(set(source_ids)):
+        raise ValueError("manifest.csv contains duplicate source_id values")
+    for row, source in zip(rows, source_ids):
+        row["source_id"] = source
+        row["role"] = row["role"].strip().lower()
+        row["display_name"] = row["display_name"].strip()
+    references = [row for row in rows if row["role"] == "reference"]
+    targets = [row for row in rows if row["role"] == "target"]
+    if len(references) < 2 or len(targets) != 1 or len(references) + len(targets) != len(rows):
+        raise ValueError("manifest.csv must contain at least two references and exactly one target")
+    if any(not row["display_name"] for row in rows):
+        raise ValueError("manifest.csv display_name values cannot be blank")
     return rows
 
 
-def read_corpus(rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+def read_corpus(rows: list[dict[str, str]], raw: Path) -> dict[str, dict[str, str]]:
     corpus: dict[str, dict[str, str]] = {}
     for row in rows:
         source = row["source_id"]
         samples: dict[str, str] = {}
-        folder = RAW / source
+        folder = raw / source
         if folder.exists():
             for path in sorted(folder.glob("*.txt")):
                 prompt = path.stem.lower()
@@ -312,12 +351,13 @@ def rarity_scores(residual, sources: list[str], prompts: list[str], k: int = 5):
     return {key: float(score) for key, score in zip(keys, percentiles)}
 
 
-def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, macro_recall,
-                  target_rows, bootstrap, rarity):
-    RESULTS.mkdir(exist_ok=True)
+def write_outputs(study, metadata, rows, prompts, warnings, refs, target, confusion, accuracy,
+                  macro_recall, target_rows, bootstrap, rarity):
+    results = study / "results"
+    results.mkdir(exist_ok=True)
     display = {r["source_id"]: r["display_name"] for r in rows}
 
-    with (RESULTS / "predictions.csv").open("w", encoding="utf-8", newline="") as handle:
+    with (results / "predictions.csv").open("w", encoding="utf-8", newline="") as handle:
         fields = ["prompt", "prediction", "margin"] + [f"distance_{s}" for s in refs]
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
@@ -326,7 +366,7 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
             output.update({f"distance_{s}": row["distances"][s] for s in refs})
             writer.writerow(output)
 
-    with (RESULTS / "confusion.csv").open("w", encoding="utf-8", newline="") as handle:
+    with (results / "confusion.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["actual\\predicted"] + refs)
         for actual in refs:
@@ -335,6 +375,7 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
     vote_counts = Counter(row["prediction"] for row in target_rows)
     ranked = sorted(refs, key=lambda s: bootstrap[s]["mean_distance"])
     summary = {
+        "study_title": metadata["title"],
         "matched_prompts": prompts,
         "reference_accuracy": accuracy,
         "reference_macro_recall": macro_recall,
@@ -344,7 +385,7 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
         "bootstrap": bootstrap,
         "warnings": warnings,
     }
-    (RESULTS / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    (results / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
     verdict_ok = len(prompts) >= 20 and accuracy >= 0.70
     screening_ok = len(prompts) >= 8 and accuracy >= 0.60
@@ -356,7 +397,7 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
         status = "NOT INTERPRETABLE"
 
     report = [
-        "# Ox Alpha writing-fingerprint report", "",
+        f"# {metadata['title']} — writing-fingerprint report", "",
         f"**Status: {status}**", "",
         f"Matched prompts: {len(prompts)}", "",
         f"Reference leave-one-prompt-out accuracy: {accuracy:.1%}", "",
@@ -393,14 +434,14 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
         "", "## Guardrails", "",
         "- Prompt IDs, not individual documents, are held out during validation.",
         "- Prompt-level mean style is removed using references before classification.",
-        "- Ox Alpha is excluded from all training centroids.",
+        "- The target is excluded from all feature scaling, prompt means, and training centroids.",
         "- Do not combine reasoning traces with final answers.",
-        "- A close GLM result cannot distinguish a base model from a fine-tune or shared serving stack.",
+        "- A close result cannot distinguish a base model from a fine-tune, system prompt, or shared serving stack.",
     ]
-    (RESULTS / "report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (results / "report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
 
     try:
-        mpl_cache = ROOT / ".mplconfig"
+        mpl_cache = study / ".mplconfig"
         mpl_cache.mkdir(exist_ok=True)
         os.environ.setdefault("MPLCONFIGDIR", str(mpl_cache))
         os.environ.setdefault("XDG_CACHE_HOME", str(mpl_cache))
@@ -421,9 +462,9 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
         ax.set_yticks(y, [labels[i] for i in order])
         ax.invert_yaxis()
         ax.set_xlabel("Mean standardized distance (lower is closer)")
-        ax.set_title("Ox Alpha similarity to reference writing fingerprints")
+        ax.set_title(f"{display[target]} similarity to reference writing fingerprints")
         fig.tight_layout()
-        fig.savefig(RESULTS / "target_similarity.png", dpi=180)
+        fig.savefig(results / "target_similarity.png", dpi=180)
         plt.close(fig)
 
         all_sources = refs + [target]
@@ -435,17 +476,18 @@ def write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, ma
             body.set_alpha(0.65)
         ax.set_xticks(range(1, len(all_sources) + 1), [display[s] for s in all_sources], rotation=18)
         ax.set_ylabel("Small-sample rarity percentile")
-        ax.set_title("Writing-feature rarity by source (exploratory; not StoryScope narrative rarity)")
+        ax.set_title("Writing-feature rarity by source (exploratory; not a model identity test)")
         fig.tight_layout()
-        fig.savefig(RESULTS / "rarity_violin.png", dpi=180)
+        fig.savefig(results / "rarity_violin.png", dpi=180)
         plt.close(fig)
     except Exception as exc:
         print(f"Plotting skipped: {exc}")
 
 
-def run() -> int:
-    rows = load_manifest()
-    corpus = read_corpus(rows)
+def run(study: Path) -> int:
+    metadata = load_study_metadata(study)
+    rows = load_manifest(study)
+    corpus = read_corpus(rows, study / "data" / "raw")
     prompts, warnings = validate(rows, corpus)
     if len(prompts) < 4:
         print("Need at least four matched prompts to run a smoke analysis.")
@@ -457,9 +499,9 @@ def run() -> int:
     target_rows = classify_target(residual, refs, target, prompts)
     bootstrap = bootstrap_target(target_rows, refs)
     rarity = rarity_scores(residual, refs + [target], prompts)
-    write_outputs(rows, prompts, warnings, refs, target, confusion, accuracy, macro_recall,
-                  target_rows, bootstrap, rarity)
-    print(f"Wrote analysis to {RESULTS}")
+    write_outputs(study, metadata, rows, prompts, warnings, refs, target, confusion, accuracy,
+                  macro_recall, target_rows, bootstrap, rarity)
+    print(f"Wrote analysis to {study / 'results'}")
     print(f"Reference accuracy: {accuracy:.1%}")
     print("Target ranking:")
     for source in sorted(refs, key=lambda s: bootstrap[s]["mean_distance"]):
@@ -468,17 +510,31 @@ def run() -> int:
     return 0
 
 
+def parse_args():
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command", nargs="?", choices=["validate", "run"], default="run")
+    parser.add_argument(
+        "--study", default=".",
+        help="Study directory containing manifest.csv and data/ (default: current directory)",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
-    command = sys.argv[1] if len(sys.argv) > 1 else "run"
-    if command not in {"run", "validate"}:
-        print("Usage: python3 analyze.py [validate|run]")
+    args = parse_args()
+    try:
+        study = resolve_study(args.study)
+        rows = load_manifest(study)
+        corpus = read_corpus(rows, study / "data" / "raw")
+        if args.command == "validate":
+            validate(rows, corpus)
+            return 0
+        return run(study)
+    except ValueError as exc:
+        print(f"Configuration error: {exc}", file=sys.stderr)
         return 2
-    rows = load_manifest()
-    corpus = read_corpus(rows)
-    if command == "validate":
-        validate(rows, corpus)
-        return 0
-    return run()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,47 @@
+{
+  "glm_5_3": {
+    "model": "z-ai/glm-5.3",
+    "max_tokens": 16000,
+    "reasoning": {"effort": "high", "exclude": true},
+    "provider": {"require_parameters": true}
+  },
+  "glm_5_2": {
+    "model": "z-ai/glm-5.2",
+    "max_tokens": 6000,
+    "provider": {"require_parameters": false}
+  },
+  "glm_5": {
+    "model": "z-ai/glm-5",
+    "max_tokens": 16000,
+    "reasoning": {"effort": "high", "exclude": true},
+    "provider": {"require_parameters": true}
+  },
+  "mimo_v2_5": {
+    "model": "xiaomi/mimo-v2.5",
+    "max_tokens": 6000,
+    "provider": {"require_parameters": false}
+  },
+  "deepseek_v4_flash": {
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "max_tokens": 16000,
+    "reasoning": {"effort": "high", "exclude": true},
+    "provider": {"require_parameters": true}
+  },
+  "gemini_3_7_flash": {
+    "model": "google/gemini-3.7-flash",
+    "max_tokens": 16000,
+    "reasoning": {"effort": "high", "exclude": true},
+    "provider": {"require_parameters": true}
+  },
+  "minimax_m3": {
+    "model": "minimax/minimax-m3:free",
+    "max_tokens": 6000,
+    "provider": {"require_parameters": false}
+  },
+  "ox_alpha": {
+    "model": "stealth/ox-alpha",
+    "max_tokens": 16000,
+    "reasoning": {"effort": "high", "exclude": true},
+    "provider": {"require_parameters": true}
+  }
+}
